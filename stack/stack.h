@@ -1,38 +1,49 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 typedef struct {
 	int top;
 	int *data;
-	int alocatedMemory;
-} Stack
+	int allocatedMemory;
+} Stack;
 
-void init(struct Stack* s)
-void destroy(struct Stack* s)
-void push(struct Stack* s, int element)
-int pop(struct Stack* s)
-bool isEmpty(struct Stack* s)
+void init(Stack *s);
+void destroy(Stack *s);
+void push(Stack *s, int element);
+int pop(Stack *s);
+bool isEmpty(Stack *s);
 
 
-void init(struct Stack* s){
+void init(Stack *s){
 	s->data = NULL;
 	s->top = 0;
-	s->alocatedMemory = 0;
+	s->allocatedMemory = 0;
 }
-void destroy(struct Stack* s){
-	free(s);
+void destroy(Stack* s){
+	free(s->data);
 }
-void push(struct Stack* s, int element){
-	if(s->top >= s->alocatedMemory){
-		realloc(s->data, (size_t)(5 * sizeof(int)));
-		s->alocatedMemory += 5;
+void push(Stack* s, int element){
+	if(s->top >= s->allocatedMemory){
+	    int *temp;
+		if(!(temp = realloc(s->data, (size_t)((s->allocatedMemory + 5) * sizeof(int))))){
+		    printf("realloc fail");
+		    exit(0);
+		}
+		s->data = temp;
+		s->allocatedMemory += 5;
 	}
-	*(s->data + top)
+	s->data[s->top] = element;
+	s->top++;
 }
-int pop(struct Stack* s){
-	
+int pop(Stack* s){
+	if(s->top){
+	    return s->data[--(s->top)];
+	}
+	printf("Empty stack    ");
+	return 0;
 }
-bool isEmpty(struct Stack* s){
+bool isEmpty(Stack* s){
 	if(s->top){
 		return 0;
 	}

@@ -1,11 +1,6 @@
-//
-// Created by maciek on 07/10/19.
-//
-
 #include "Stack.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <iostream>
 
 Stack::Stack(){

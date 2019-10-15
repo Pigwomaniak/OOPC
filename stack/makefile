@@ -1,14 +1,19 @@
-all: stack
+# List your *.h files here:
+headers = stack.h
 
-stack: stack.o stack.o
-	gcc -g $^ -o $@ -lm -lSDL -lpthread -lSDL_gfx
+# List your *.c files here:
+sources = stack.c testStack.c
 
-.c.o: 
-	gcc -g -Wall -pedantic -std=c99 -c -D_REENTRANT $<
+program: $(headers) $(sources)
+	gcc -g -Wall -pedantic -std=c99 $(sources) -o program
 
-stack.o: stack.c stack.h
-
-stack.o: stack.c stack.h
+.PHONY: clean check debug
 
 clean:
-	-rm stack.o stack.o stack
+	-rm program
+
+check: program
+	valgrind ./program
+
+debug: program
+	gdb program

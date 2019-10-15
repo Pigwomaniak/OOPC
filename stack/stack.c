@@ -1,18 +1,37 @@
 #include "stack.h"
 #include <stdio.h>
-int main() {
-	printf("hello\n");
-	Stack s;
-	init(&s);
-	printf("Is empty stack: %d \n",(int)isEmpty(&s));
-	push(&s, 1);
-	push(&s, 2);
-	push(&s, 3);
-	printf("Is empty stack: %d \n",(int)isEmpty(&s));
-	printf("%d \n",pop(&s));
-	printf("%d \n",pop(&s));
-	printf("%d \n",pop(&s));
-	printf("%d \n",pop(&s));
-	destroy(&s);
-	return 0;
+
+void init(Stack *s){
+    s->data = NULL;
+    s->top = 0;
+    s->allocatedMemory = 0;
+}
+void destroy(Stack* s){
+    free(s->data);
+}
+void push(Stack* s, int element){
+    if(s->top >= s->allocatedMemory){
+        int *temp;
+        if(!(temp = realloc(s->data, (size_t)((s->allocatedMemory + 5) * sizeof(int))))){
+            printf("realloc fail");
+            exit(0);
+        }
+        s->data = temp;
+        s->allocatedMemory += 5;
+    }
+    s->data[s->top] = element;
+    s->top++;
+}
+int pop(Stack* s){
+    if(s->top){
+        return s->data[--(s->top)];
+    }
+    printf("Empty stack    ");
+    return 0;
+}
+bool isEmpty(Stack* s){
+    if(s->top){
+        return 0;
+    }
+    return 1;
 }

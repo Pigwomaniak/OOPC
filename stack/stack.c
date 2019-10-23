@@ -11,13 +11,15 @@ void destroy(Stack* s){
 }
 void push(Stack* s, int element){
     if(s->top >= s->allocatedMemory){
-        int *temp;
-        if(!(temp = realloc(s->data, (size_t)((s->allocatedMemory + 5) * sizeof(int))))){
+        if(s->allocatedMemory == 0){
+            s->allocatedMemory = 1;
+        }else{
+            s->allocatedMemory *= 2;
+        }
+        if(!(s->data = realloc(s->data, (size_t)((s->allocatedMemory) * sizeof(int))))){
             printf("realloc fail");
             exit(0);
         }
-        s->data = temp;
-        s->allocatedMemory += 5;
     }
     s->data[s->top] = element;
     s->top++;

@@ -8,10 +8,12 @@
 class Stack {
 public:
     Stack();
+    Stack(Stack* sourceS);
     ~Stack();
     void push(int element);
     int pop();
     bool isEmpty();
+    Stack& operator=(Stack& srcS);
 
 private:
     int top;

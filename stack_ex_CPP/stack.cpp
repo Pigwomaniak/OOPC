@@ -6,11 +6,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <cassert>
 
 Stack::Stack(){
     top = 0;
     data = NULL;
     allocatedMemory = 0;
+}
+Stack::Stack(Stack *sourceS) {
+    this->top = 0;
+    this->allocatedMemory = sourceS->allocatedMemory;
+    this->data = (int*)realloc(nullptr, (size_t)(allocatedMemory * sizeof(int)));
+    assert(this->data);
+    int current = 0;
+    while (this->top < sourceS->top){
+        this->push(sourceS->data[current++]);
+    }
 }
 
 void Stack::push(int element) {
@@ -38,4 +49,17 @@ bool Stack::isEmpty() {
 
 Stack::~Stack() {
     free(data);
+}
+Stack& Stack::operator=(Stack &srcS) {
+    if(this == &srcS){
+        return *this;
+    }
+    this->data = (int*)realloc(this->data, (size_t) sizeof(int) * srcS.allocatedMemory);
+    assert(this->data);
+    int current = 0;
+    this->top = 0;
+    while(current < srcS.top){
+        this->push(srcS.data[current++]);
+    }
+    return *this;
 }

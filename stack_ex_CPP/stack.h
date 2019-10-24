@@ -8,12 +8,12 @@
 class Stack {
 public:
     Stack();
-    Stack(Stack* sourceS);
+    explicit Stack(Stack* sourceS);
     ~Stack();
     void push(int element);
     int pop();
     bool isEmpty();
-    Stack& operator=(Stack& srcS);
+    Stack& operator=(const Stack& srcS);
 
 private:
     int top;

@@ -10,7 +10,7 @@
 
 Stack::Stack(){
     top = 0;
-    data = NULL;
+    data = nullptr;
     allocatedMemory = 0;
 }
 Stack::Stack(Stack *sourceS) {
@@ -50,7 +50,7 @@ bool Stack::isEmpty() {
 Stack::~Stack() {
     free(data);
 }
-Stack& Stack::operator=(Stack &srcS) {
+Stack& Stack::operator=(const Stack &srcS) {
     if(this == &srcS){
         return *this;
     }

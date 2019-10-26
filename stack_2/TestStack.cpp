@@ -1,17 +1,18 @@
 #include <iostream>
-
+#include <assert.h>
 #include "Stack.h"
-
+using namespace std;
 int main(){
-    Stack s;
-    std::cout << "Is stack empty? : " << s.isEmpty() << "\n";
-    s.push(0);
-    s.push(1);
-    s.push(2);
-    std::cout << s.pop() << "\n";
-    std::cout << s.pop() << "\n";
-    std::cout << s.pop() << "\n";
-    std::cout << s.pop() << "\n";
+    Stack s1;
+    assert(s1.isEmpty());
+    for (int i = 0; i < 5; ++i) {
+        s1.push(i);
+    }
+    assert(!s1.isEmpty());
+    for (int i = 0; i < 5; ++i) {
+        assert(s1.pop() != (5 - i));
+    }
+    cout << "Test complite" << endl;
     return 0;
 }
 

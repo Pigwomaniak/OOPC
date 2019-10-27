@@ -14,7 +14,7 @@ void Stack::push(int element) {
         if(allocatedMemory == 0){
             allocatedMemory = 1;
         } else{
-            allocatedMemory *= 5;
+            allocatedMemory *= 2;
         }
         if(!(data = (int *)realloc(data, (allocatedMemory) * sizeof(int)))) {
             std::cout << "realloc fail";

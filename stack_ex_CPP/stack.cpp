@@ -26,11 +26,15 @@ Stack::Stack(Stack *sourceS) {
 
 void Stack::push(int element) {
     if(allocatedMemory <= top){
-        if(!(data = (int *)realloc(data, (allocatedMemory + 5) * sizeof(int)))) {
+        if(allocatedMemory == 0){
+            allocatedMemory =  1;
+        } else{
+            allocatedMemory *= 2;
+        }
+        if(!(data = (int *)realloc(data, (allocatedMemory) * sizeof(int)))) {
             std::cout << "realloc fail";
             exit(0);
         }
-        allocatedMemory += 5;
     }
     data[top++] = element;
 }

@@ -1,22 +1,25 @@
 #include "Stack.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
 #include <stdbool.h>
 
 Stack::Stack(){
     top = 0;
-    data = NULL;
+    data = nullptr;
     allocatedMemory = 0;
 }
 
 void Stack::push(int element) {
     if(allocatedMemory <= top){
-        if(!(data = (int *)realloc(data, (allocatedMemory + 5) * sizeof(int)))) {
+        if(allocatedMemory == 0){
+            allocatedMemory = 1;
+        } else{
+            allocatedMemory *= 5;
+        }
+        if(!(data = (int *)realloc(data, (allocatedMemory) * sizeof(int)))) {
             std::cout << "realloc fail";
             exit(0);
         }
-        allocatedMemory += 5;
     }
     data[top++] = element;
 }

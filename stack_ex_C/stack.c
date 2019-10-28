@@ -52,9 +52,6 @@ void rewriteStack(Stack *outS, Stack *sourceS){
     if(outS == sourceS){
         return;
     }
-    if(outS->data){
-        free(outS->data);
-    }
     if(!(outS->data = realloc(outS->data, (size_t)sourceS->allocatedMemory))){
         exit(0);
     }

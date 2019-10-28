@@ -1,10 +1,4 @@
-//
-// Created by maciek on 15/10/2019.
-//
-
-#ifndef COMPLEXNUM_COMPLEXNUM_H
-#define COMPLEXNUM_COMPLEXNUM_H
-
+#pragma once
 #include <iostream>
 using namespace std;
 
@@ -20,11 +14,10 @@ public:
     double amplitude();
     double phase();
 
-    ComplexNum operator + (ComplexNum secondNum);
-    ComplexNum operator - (ComplexNum secondNum);
-    ComplexNum operator * (ComplexNum secondNum);
-    ComplexNum operator / (ComplexNum secondNum);
-
+    friend ComplexNum operator + (const ComplexNum& firstNum, const ComplexNum& secondNum);
+	friend ComplexNum operator - (const ComplexNum& firstNum, const ComplexNum& secondNum);
+	friend ComplexNum operator * (const ComplexNum& firstNum, const ComplexNum& secondNum);
+	friend ComplexNum operator / (const ComplexNum& firstNum, const ComplexNum& secondNum);
 
 
     friend ostream &operator << (ostream &out, ComplexNum &c);

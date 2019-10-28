@@ -22,28 +22,28 @@ double ComplexNum::amplitude(){
 double ComplexNum::phase() {
     return atan2(im, re);
 }
-ComplexNum ComplexNum::operator + (ComplexNum secondNum) {
+ComplexNum operator + (const ComplexNum& firstNum, const ComplexNum& secondNum) {
     ComplexNum out;
-    out.im = this->im + secondNum.im;
-    out.re = this->re + secondNum.re;
+    out.im = firstNum->im + secondNum.im;
+    out.re = firstNum->re + secondNum.re;
     return out;
 }
-ComplexNum ComplexNum::operator - (ComplexNum secondNum) {
+ComplexNum operator - (const ComplexNum& firstNum, const ComplexNum& secondNum) {
     ComplexNum out;
-    out.im = this->im - secondNum.im;
-    out.re = this->re - secondNum.re;
+    out.im = firstNum->im - secondNum.im;
+    out.re = firstNum->re - secondNum.re;
     return out;
 }
-ComplexNum ComplexNum::operator*(ComplexNum secondNum) {
+ComplexNum operator * (const ComplexNum& firstNum, const ComplexNum& secondNum) {
     ComplexNum out;
-    out.re = ((this->re*secondNum.re)-(this->im * secondNum.im));
-    out.im = ((this->re * secondNum.im) + (this->im * secondNum.re));
+    out.re = ((firstNum->re*secondNum.re)-(firstNum->im * secondNum.im));
+    out.im = ((firstNum->re * secondNum.im) + (firstNum->im * secondNum.re));
     return out;
 }
-ComplexNum ComplexNum::operator/(ComplexNum secondNum) {
+ComplexNum operator / (const ComplexNum& firstNum, const ComplexNum& secondNum) {
     ComplexNum out;
-    out.re = ((this->re * secondNum.re) + (this->im * secondNum.im)) / (pow(secondNum.re, (double)2) + pow(secondNum.im, (double)2));
-    out.im = ((this->im * secondNum.re) - (this->re * secondNum.im)) / (pow(secondNum.re, (double)2) + pow(secondNum.im, (double)2));
+    out.re = ((firstNum->re * secondNum.re) + (firstNum->im * secondNum.im)) / (pow(secondNum.re, (double)2) + pow(secondNum.im, (double)2));
+    out.im = ((firstNum->im * secondNum.re) - (firstNum->re * secondNum.im)) / (pow(secondNum.re, (double)2) + pow(secondNum.im, (double)2));
     return out;
 }
 

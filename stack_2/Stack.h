@@ -1,7 +1,4 @@
-#ifndef STACK_2_STACK_H
-#define STACK_2_STACK_H
-
-#include <stdbool.h>
+#pragma once
 
 class Stack {
 public:
@@ -16,6 +13,3 @@ private:
     int* data;
     int allocatedMemory;
 };
-
-
-#endif //STACK_2_STACK_H

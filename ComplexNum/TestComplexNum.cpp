@@ -43,6 +43,6 @@ int main() {
     assert((b * 7) == ComplexNum(281.75, 196));
     assert((7 * b) == ComplexNum(281.75, 196));
     cout << a << "  " << b << " "<< c << endl;
-    cout << "Test Complite" << endl;
+    cout << "Test Complete" << endl;
     return 0;
 }

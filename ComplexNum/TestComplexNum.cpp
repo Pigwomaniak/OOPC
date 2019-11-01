@@ -14,6 +14,9 @@ int main() {
     assert(a != c);
     assert(a == a);
 
+    assert(c.amplitude() == 3.5);
+    assert(c.phase() == 0);
+
     a += b += c;
     assert(a == ComplexNum(12.5, 9));
     assert(b == ComplexNum(11.5, 8));

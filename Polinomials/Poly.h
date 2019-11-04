@@ -3,6 +3,13 @@
 //
 #pragma once
 
+#include <set>
+#include <vector>
+
 class Poly {
+public:
+
+private:
+
 
 };

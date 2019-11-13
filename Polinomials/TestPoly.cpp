@@ -4,11 +4,12 @@
 using namespace std;
 
 int main() {
+	
 	Poly p1;															// Declare object representing polynomial p1	
 	p1[3] = 2;															// Specify coefficients of p1 = 2x^3 + 3.6x + 7
 	p1[1] = 3.6;
 	p1[0] = 7;
-
+/*
 	cout << "Polynomial p1: " << p1 << endl;							// Print p1 	
 	
 	Poly p2 = 5;														// Declare object representing polynomial p2 = 5
@@ -47,4 +48,6 @@ int main() {
 
 	double val = p1(1.5);												// Calculate value of p1 at point 1.5
 	cout << "Value of polynomial p1 at point 1.5: " << val << endl;
-};
+	*/
+	return 0;
+}

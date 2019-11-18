@@ -9,6 +9,7 @@ class Poly {
 public:
 	Poly();
 	Poly(const Poly* src);
+	double& operator [] (const double key);
 
 private:
 	std::map<double, double> 	data;

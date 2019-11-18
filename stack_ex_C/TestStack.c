@@ -23,17 +23,21 @@ int main() {
     for (int i = 0; i < NUM_OF_ELEMENTS; ++i) {
         assert(pop(&s) == pop(&s2));
     }
+    assert(isEmpty(&s) && isEmpty(&s2));
     printf("copyStack OK\n");
 
     // Test for rewriteStack()
 
-    for (int j = 0; j < NUM_OF_ELEMENTS; ++j) {
+	for (int j = 0; j < NUM_OF_ELEMENTS; ++j) {
         push(&s, j);
         push(&s2, j + 2);
     }
     push(&s2, 1);
+	
     rewriteStack(&s2, &s);
+	
     rewriteStack(&s3, &s);
+	
     for (int i = 0; i < NUM_OF_ELEMENTS; ++i) {
         int stack1 = pop(&s);
         int stack2 = pop(&s2);
@@ -41,8 +45,8 @@ int main() {
         //printf(" liczba %d ; %d ; %d", stack1, stack2, stack3);
         assert((stack1 == stack2) && (stack1 == stack3));
     }
+    assert(isEmpty(&s) && isEmpty(&s2) && isEmpty(&s3));
     printf("rewriteStack OK\n");
-
     destroy(&s);
     destroy(&s2);
     destroy(&s3);

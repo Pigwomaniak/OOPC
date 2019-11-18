@@ -3,3 +3,9 @@
 //
 
 #include "Poly.h"
+Poly::Poly(){
+	
+}
+double& Poly::operator[](const double key){
+	return data[key];
+}

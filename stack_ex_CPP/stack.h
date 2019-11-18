@@ -1,9 +1,4 @@
-//
-// Created by maciek on 24/10/2019.
-//
-
-#ifndef STACK_EX_CPP_STACK_H
-#define STACK_EX_CPP_STACK_H
+#pragma once
 
 class Stack {
 public:
@@ -20,8 +15,3 @@ private:
     int* data;
     int allocatedMemory;
 };
-
-
-
-
-#endif //STACK_EX_CPP_STACK_H

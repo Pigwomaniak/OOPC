@@ -13,7 +13,6 @@ ComplexNum::ComplexNum(double newRe, double newIm) {
     im = newIm;
     re = newRe;
 }
-ComplexNum::~ComplexNum() = default;
 double ComplexNum::amplitude(){
     return sqrt(pow(re, 2) + pow(im, 2));
 }
@@ -46,7 +45,7 @@ ComplexNum operator / (const ComplexNum& firstNum, const ComplexNum& secondNum) 
             / (pow(secondNum.re, (double)2) + pow(secondNum.im, (double)2));
     return out;
 }
-ostream &operator << (ostream &out, ComplexNum c){
+ostream &operator << (ostream &out, const ComplexNum &c){
     out << c.re << " +i" << c.im;
     return out;
 }

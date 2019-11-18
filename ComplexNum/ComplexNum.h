@@ -7,7 +7,6 @@ public:
     ComplexNum();
     ComplexNum(double newRe);
     ComplexNum(double newRe, double newIm);
-    ~ComplexNum();
 
     double re;
     double im;
@@ -15,17 +14,18 @@ public:
     double amplitude();
     double phase();
 
-    friend ComplexNum operator + (const ComplexNum& firstNum, const ComplexNum& secondNum);
-	friend ComplexNum operator - (const ComplexNum& firstNum, const ComplexNum& secondNum);
-	friend ComplexNum operator * (const ComplexNum& firstNum, const ComplexNum& secondNum);
-	friend ComplexNum operator / (const ComplexNum& firstNum, const ComplexNum& secondNum);
-    friend ostream &operator << (ostream &out, ComplexNum c);
-
-    friend bool operator == (const ComplexNum& firstNum, const ComplexNum& secondNum);
-    friend bool operator != (const ComplexNum& firstNum, const ComplexNum& secondNum);
 
     ComplexNum& operator += (const ComplexNum& secondNum);
     ComplexNum& operator -= (const ComplexNum& secondNum);
     ComplexNum& operator *= (const ComplexNum& secondNum);
     ComplexNum& operator /= (const ComplexNum& secondNum);
 };
+
+ComplexNum operator + (const ComplexNum& firstNum, const ComplexNum& secondNum);
+ComplexNum operator - (const ComplexNum& firstNum, const ComplexNum& secondNum);
+ComplexNum operator * (const ComplexNum& firstNum, const ComplexNum& secondNum);
+ComplexNum operator / (const ComplexNum& firstNum, const ComplexNum& secondNum);
+ostream &operator << (ostream &out, const ComplexNum &c);
+
+bool operator == (const ComplexNum& firstNum, const ComplexNum& secondNum);
+bool operator != (const ComplexNum& firstNum, const ComplexNum& secondNum);

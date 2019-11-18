@@ -4,9 +4,9 @@
 using namespace std;
 
 void display(const Poly& p1, const Poly& p2);
-/*
 void test(const Poly& p1, const Poly& p2);
 void testAddition(const Poly& p1, const Poly& p2);
+/*
 void testSubtraction(const Poly& p1, const Poly& p2);
 void testMultiplication(const Poly& p1, const Poly& p2);
 void testNegation(const Poly& p1, const Poly& p2);

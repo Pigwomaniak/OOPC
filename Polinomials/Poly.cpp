@@ -16,7 +16,7 @@ double& Poly::operator[](const unsigned int key){
 Poly& Poly::operator = (const Poly& src){
 	data.clear();
 	data = src.data;
-	return this;
+	return *this;
 }
 
 std::ostream& operator << (std::ostream& out, const Poly& src){
@@ -27,9 +27,9 @@ std::ostream& operator << (std::ostream& out, const Poly& src){
 	return out;
 }
 
-Poly& Poly::operator + (const Poly src){
+Poly Poly::operator + (const Poly& src){
 	for(auto& [key, value]: src.data){
 		data[key] += value;
 	}
-	return this;
+	return *this;
 }

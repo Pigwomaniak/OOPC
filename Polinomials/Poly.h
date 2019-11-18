@@ -15,8 +15,8 @@ public:
 	Poly(const Poly* src);
 	double& operator [] (const unsigned int key);
 	friend std::ostream& operator << (std::ostream& out, const Poly& src);
-	Poly& Poly::operator = (const Poly& src);
-	Poly& poly::operator + (const Poly src);
-	//Poly& poly::operator - (const Poly src);
-	//Poly& poly::operator * (const Poly src);
+	Poly& operator = (const Poly& src);
+	Poly operator + (const Poly& src);
+	//Poly& operator - (const Poly src);
+	//Poly& operator * (const Poly src);
 };

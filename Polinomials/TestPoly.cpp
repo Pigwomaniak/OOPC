@@ -6,12 +6,11 @@ using namespace std;
 void display(const Poly& p1, const Poly& p2);
 void test(const Poly& p1, const Poly& p2);
 void testAddition(const Poly& p1, const Poly& p2);
-/*
 void testSubtraction(const Poly& p1, const Poly& p2);
 void testMultiplication(const Poly& p1, const Poly& p2);
 void testNegation(const Poly& p1, const Poly& p2);
 void testValue(const Poly& p1, const Poly& p2);
-*/
+
 int main() {
 	Poly p1;															// Declare object representing polynomial p1	
 	p1[3] = 2;															// Specify coefficients of p1 = 2x^3 + 3.6x + 7
@@ -34,10 +33,10 @@ void display(const Poly& p1, const Poly& p2) {
 
 void test(const Poly& p1, const Poly& p2) {
 	testAddition(p1, p2);	
-	//testSubtraction(p1, p2);	
-	//testMultiplication(p1, p2);
-	//testNegation(p1, p2);
-	//testValue(p1, p2);
+	testSubtraction(p1, p2);
+	testMultiplication(p1, p2);
+	testNegation(p1, p2);
+	testValue(p1, p2);
 }
 
 void testAddition(const Poly& p1, const Poly& p2) {
@@ -50,7 +49,7 @@ void testAddition(const Poly& p1, const Poly& p2) {
 	p = 3.1 + p1;
 	cout << "Sum of 3.1 and polynomial p1: " << p << endl;
 }
-/*
+
 void testSubtraction(const Poly& p1, const Poly& p2) {
 	cout << "Difference of polynomials p1 and p2: " << p1 - p2 << endl;
 	cout << "Difference of polynomials p1 and p1: " << p1 - p1 << endl;	// Should display 0 (not 0x^3 + 0x + 0)
@@ -73,4 +72,4 @@ void testValue(const Poly& p1, const Poly& p2) {
 	cout << "Value of polynomial p1 at point 1.5: " << p1(1.5) << endl;
 	cout << "Value of polynomial p2 at point 2.3: " << p2(2.3) << endl;
 }
-*/
+

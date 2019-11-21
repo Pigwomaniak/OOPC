@@ -65,7 +65,13 @@ Poly operator * (const Poly& prev, const Poly& src){
     for(auto& srcElement: src.data){
         for(auto& prevElement: prev.data){
             out.data[srcElement.first + prevElement.first] += srcElement.second * prevElement.second;
+            if(out.data[srcElement.first + prevElement.first] == 0){
+                out.data.erase(out.data[srcElement.first + prevElement.first]);
+            }
         }
+    }
+    if(out.data.empty()){
+        out[0] = 0;
     }
     return out;
 }

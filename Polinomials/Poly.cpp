@@ -6,25 +6,31 @@
 #include <cmath>
 
 Poly::Poly(){
-	data[0] = 0;
+//	data[0] = 0;
 }
 Poly::Poly(double src){
 	data[0] = src;
 }
+/*
 Poly::Poly(const Poly &src) {
     data = src.data;
 }
+ */
 double& Poly::operator[](unsigned int key){
 	return data[key];
 }
-
+/*
 Poly& Poly::operator = (const Poly& src){
 	data.clear();
 	data = src.data;
 	return *this;
 }
-
+*/
 std::ostream& operator << (std::ostream& out, const Poly& src){
+    if(src.data.empty()){
+        out << "0" << std::endl;
+        return out;
+    }
 	for(auto& element: src.data){
 	    if(element.second > 0){
 	        out << "+";
@@ -53,10 +59,11 @@ Poly operator - (const Poly& prev, const Poly& src){
         if(out.data[element.first] == 0){
             out.data.erase(element.first);
         }
-    }
+    }/*
     if(out.data.empty()){
         out[0] = 0;
     }
+    */
     return out;
 }
 
@@ -69,10 +76,11 @@ Poly operator * (const Poly& prev, const Poly& src){
                 out.data.erase(out.data[srcElement.first + prevElement.first]);
             }
         }
-    }
+    }/*
     if(out.data.empty()){
         out[0] = 0;
     }
+    */
     return out;
 }
 

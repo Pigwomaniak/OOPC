@@ -72,7 +72,13 @@ void testComparison(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
 }
 
 void testAdd(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
-
+    Matrix t1, t2;
+    t1 = 1 + m2x2;
+    t2(0, 0) = 1;
+    t2(0, 1) = 1;
+    t2(1, 0) = 1;
+    t2(1, 1) = 1;
+    assert(t1 = m2x2 + t2);
 }
 
 void testSubstract(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){

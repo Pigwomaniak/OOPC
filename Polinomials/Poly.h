@@ -13,11 +13,11 @@ private:
 public:
 	Poly();
 	Poly(double src);
-	Poly(const Poly& src);
+	//Poly(const Poly& src);
 	double& operator [] (unsigned int key);
 	double operator () (double x) const;
 	friend std::ostream& operator << (std::ostream& out, const Poly& src);
-	Poly& operator = (const Poly& src);
+	//Poly& operator = (const Poly& src);
     friend Poly operator + (const Poly& prev, const Poly& src);
     friend Poly operator - (const Poly& prev, const Poly& src);
     friend Poly operator * (const Poly& prev, const Poly& src);

@@ -1,8 +1,8 @@
 # List your *.h files here:
-headers = Matrix.h
+headers = Matrix.h Cref.h
 
 # List your *.cpp files here:
-sources = Matrix.cpp TestMatrix.cpp
+sources = Matrix.cpp TestMatrix.cpp Cred.cpp
 
 program: $(headers) $(sources)
 	g++ -g -Wall -pedantic $(sources) -o program

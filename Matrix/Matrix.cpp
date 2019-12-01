@@ -97,7 +97,7 @@ void Matrix::resizeTab(Size newSize) {
 
 void Matrix::freeTab() {
     if(tab){
-        for (unsigned int i = 0; i < size.y; ++i) {
+        for (unsigned int i = 0; i < size.x; ++i) {
             if(tab[i]){
                 delete[] tab[i];
             }

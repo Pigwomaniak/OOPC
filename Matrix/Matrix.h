@@ -37,6 +37,7 @@ public:
     Matrix readMatrixFromFile(const char* fileName);
     double& operator ()(unsigned int x, unsigned int y);
     Matrix& operator = (const Matrix& src);
+	friend std::iostream& operator << (std::iostream& out, const Matrix& src);
     friend Matrix operator + (const Matrix& prev, const Matrix& src);
 
 };

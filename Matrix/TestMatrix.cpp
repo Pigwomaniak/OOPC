@@ -25,7 +25,9 @@ int main(){
 
     Matrix m2x3;
     Matrix m3x3;
-    //testReadFromFile(m2x3, m3x3);
+    testReadFromFile(m2x3, m3x3);
+	    cout << m2x2;
+	//display(m2x2, m2x3, m3x3);
     //test(m2x2, m2x3, m3x3);
 }
 
@@ -44,13 +46,17 @@ void test(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     testMultiply(m2x2, m2x3, m3x3);
     testMultiplyEqual(m2x2, m2x3, m3x3);
 }
+*/
 
+/*
 void display(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     cout << "Matrix 2x2:" << endl << m2x2 << endl;
     cout << "Matrix 2x3:" << endl << m2x3 << endl;
     cout << "Matrix 3x3:" << endl << m3x3 << endl;
 }
 
+*/
+/*
 void testComparison(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     Matrix t1 = m2x2;
     assert(t1 == t1);

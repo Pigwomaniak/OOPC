@@ -161,7 +161,18 @@ void Matrix::copyTab(Matrix &dest, const Matrix &src) {
     }
 }
 
-
+std::iostream& operator << (std::iostream& out, const Matrix& src){
+	/*
+	for (unsigned int i = 0; i < src.size.y; ++i){
+		out << "| ";
+		for (unsigned int j = 0; j < src.size.x; ++j){
+			//out << (src.tab[j][i]) << " ";
+		}
+		out << "|" << std::endl;
+	}
+	*/
+	return out;
+}
 
 
 

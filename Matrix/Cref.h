@@ -1,13 +1,8 @@
 #pragma once
 
-#include "Matrix.h"
-
 class Cref {
-    friend class Matrix;
+    friend class rcMatrix;
 private:
-    //Matrix& mat;
-    unsigned int x;
-    unsigned int y;
 
 public:
     Cref();

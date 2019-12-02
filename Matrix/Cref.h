@@ -5,8 +5,12 @@
 class Cref {
     friend class Matrix;
 private:
-    Matrix& mat;
+    //Matrix& mat;
+    unsigned int x;
+    unsigned int y;
+
 public:
     Cref();
     ~Cref();
+
 };

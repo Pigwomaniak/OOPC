@@ -1,5 +1,5 @@
-#include <Matrix.h>
 #include <cassert>
+#include "Matrix.h"
 
 using namespace std;
 
@@ -17,21 +17,23 @@ void testMultiplyEqual(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x
 
 int main(){
     Matrix m2x2;
+
     m2x2(0, 0) = 1;
     m2x2(0, 1) = 2;
     m2x2(1, 0) = 3;
-    m2x2(1, 0) = 4;
+    m2x2(1, 1) = 4;
 
     Matrix m2x3;
     Matrix m3x3;
-    testReadFromFile(m2x3, m3x3);
-    test(m2x2, m2x3, m3x3);
+    //testReadFromFile(m2x3, m3x3);
+    //test(m2x2, m2x3, m3x3);
 }
 
 void testReadFromFile(Matrix& m2x3, Matrix& m3x3){
-
+    m2x3.readMatrixFromFile("matrix_2x3");
+    m3x3.readMatrixFromFile("matrix_3x3");
 }
-
+/*
 void test(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     display(m2x2, m2x3, m3x3);
     testComparison(m2x2, m2x3, m3x3);
@@ -99,3 +101,4 @@ void testSubstractEqual(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3
 void testMultiplyEqual(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
 
 }
+ */

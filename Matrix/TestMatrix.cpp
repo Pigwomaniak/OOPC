@@ -3,8 +3,11 @@
 
 using namespace std;
 
+void testRcMatrix();
+
+
 void testReadFromFile(Matrix& m2x3, Matrix& m3x3);
-void test(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3);
+void testFinal(/*const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3*/);
 void display(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3);
 void testComparison(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3);
 void testAdd(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3);
@@ -16,37 +19,41 @@ void testMultiplyEqual(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x
 
 
 int main(){
-    /*
+    testRcMatrix();
+
+    testFinal();
+    return 0;
+}
+void testRcMatrix(){
+    rcMatrix newRc(Size(3, 3));
+    rcMatrix* new2RcPtr = newRc.detach();
+    Matrix mat1(Size{4, 4});
+    Matrix mat2(mat1);
+}
+
+
+
+
+void testFinal(/*const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3*/){
     Matrix m2x2;
+    Matrix m2x3;
+    Matrix m3x3;
 
     m2x2(0, 0) = 1;
     m2x2(0, 1) = 2;
     m2x2(1, 0) = 3;
     m2x2(1, 1) = 4;
-*/
-    //Matrix m2x3;
-    //Matrix m3x3;
-    //testReadFromFile(m2x3, m3x3);
-	//display(m2x2, m2x3, m3x3);
-    //test(m2x2, m2x3, m3x3);
-}
-/*
-void testReadFromFile(Matrix& m2x3, Matrix& m3x3){
-    m2x3.readMatrixFromFile("matrix_2x3");
-    m3x3.readMatrixFromFile("matrix_3x3");
+
+    //display(m2x2, m2x3, m3x3);
+    //testComparison(m2x2, m2x3, m3x3);
+    //testAdd(m2x2, m2x3, m3x3);
+    //testSubstract(m2x2, m2x3, m3x3);
+    //testAddEqual(m2x2, m2x3, m3x3);
+    //testSubstractEqual(m2x2, m2x3, m3x3);
+    //testMultiply(m2x2, m2x3, m3x3);
+    //testMultiplyEqual(m2x2, m2x3, m3x3);
 }
 
-void test(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
-    display(m2x2, m2x3, m3x3);
-    testComparison(m2x2, m2x3, m3x3);
-    testAdd(m2x2, m2x3, m3x3);
-    testSubstract(m2x2, m2x3, m3x3);
-    testAddEqual(m2x2, m2x3, m3x3);
-    testSubstractEqual(m2x2, m2x3, m3x3);
-    testMultiply(m2x2, m2x3, m3x3);
-    testMultiplyEqual(m2x2, m2x3, m3x3);
-}
-*/
 
 /*
 void display(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
@@ -55,8 +62,11 @@ void display(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     cout << "Matrix 3x3:" << endl << m3x3 << endl;
 }
 
-*/
-/*
+void testReadFromFile(Matrix& m2x3, Matrix& m3x3){
+    m2x3.readMatrixFromFile("matrix_2x3");
+    m3x3.readMatrixFromFile("matrix_3x3");
+}
+
 void testComparison(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     Matrix t1 = m2x2;
     assert(t1 == t1);

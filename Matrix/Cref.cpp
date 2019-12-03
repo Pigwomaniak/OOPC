@@ -1,5 +1,7 @@
-//
-// Created by maciek on 25/11/2019.
-//
 
 #include "Cref.h"
+
+Cref &Cref::operator=(double element) {
+    this->matrix.write(element, x, y);
+    return *this;
+}

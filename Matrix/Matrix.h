@@ -4,13 +4,21 @@
 #include "rcMatrix.h"
 
 
-
+class Cref;
 class Matrix {
     friend class rcMatrix;
 private:
     rcMatrix* data;
 public:
-    Matrix(Matrix& src);
+    Matrix();
+    Matrix(const Matrix& src);
+    Matrix(const Size& size);
     Matrix& operator = (const Matrix& src);
     ~Matrix();
+    double operator()(unsigned int x, unsigned int y) const;
+    Cref operator()(unsigned int x, unsigned int y);
+    double read(unsigned int x, unsigned int y) const;
+    void write(double element, unsigned int x, unsigned int y);
+    void checkRange(unsigned int x, unsigned int y) const;
+
 };

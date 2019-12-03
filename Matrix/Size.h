@@ -10,4 +10,5 @@ public:
     bool operator == (const Size second);
     bool operator != (const Size second);
     bool isZero();
+
 };

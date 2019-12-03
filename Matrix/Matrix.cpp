@@ -54,4 +54,13 @@ Cref Matrix::operator()(unsigned int x, unsigned int y) {
     return Cref(*this, x, y);
 }
 
+std::ostream& operator << (std::ostream &out, const Matrix &src) {
+    out << *(src.data);
+    return out;
+}
+
+void Matrix::readFromFile(const char *fileName) {
+    data->readFromFile(fileName);
+}
+
 

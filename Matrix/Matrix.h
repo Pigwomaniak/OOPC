@@ -21,4 +21,6 @@ public:
     void write(double element, unsigned int x, unsigned int y);
     void checkRange(unsigned int x, unsigned int y) const;
 
+    friend  std::ostream& operator << (std::ostream& out, const Matrix& src);
+    void readFromFile(const char* fileName);
 };

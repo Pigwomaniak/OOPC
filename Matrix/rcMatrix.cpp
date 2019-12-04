@@ -178,7 +178,6 @@ void rcMatrix::readFromFile(const char *fileName) {
 bool rcMatrix::isSameMatrix(const rcMatrix &second) const {
     if(size != second.size){
         return false;
-
     }
     for (unsigned int i = 0; i < size.x; ++i) {
         for (unsigned int j = 0; j < size.y; ++j) {

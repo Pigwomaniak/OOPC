@@ -47,7 +47,7 @@ void testFinal(){
 
     testReadFromFile(m2x3, m3x3);
     display(m2x2, m2x3, m3x3);
-    //testComparison(m2x2, m2x3, m3x3);
+    testComparison(m2x2, m2x3, m3x3);
     //testAdd(m2x2, m2x3, m3x3);
     //testSubstract(m2x2, m2x3, m3x3);
     //testAddEqual(m2x2, m2x3, m3x3);
@@ -83,7 +83,7 @@ void testComparison(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     Matrix t2 = m3x3;
     assert(!(m3x3 != m3x3));
     assert(m2x2 != m2x3);
-    assert(!(t2 == m3x3));
+    assert(!(t2 != m3x3));
     t2(2, 2) = 50;
     assert(m3x3 != t2);
 

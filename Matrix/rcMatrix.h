@@ -19,17 +19,20 @@ private:
 public:
     rcMatrix(const Size& size);
     rcMatrix(const rcMatrix& src, const Size& NewSize);
+    rcMatrix(const double element);
+    rcMatrix(const Size& size, const double element);
     rcMatrix* detach();
     ~rcMatrix();
     void refCountIncrease();
+    void refCountDecrease();
     Size getSize();
     unsigned int getRefCount();
-    void  refCountDecrease();
     double readElement(unsigned int x, unsigned int y);
     void writeElement(double element, unsigned int x, unsigned int y);
     bool inRange(unsigned int x, unsigned int y);
     friend std::ostream& operator << (std::ostream& out, const rcMatrix& src);
     void readFromFile(const char* fileName);
+    bool isSameMatrix(const rcMatrix& second) const ;
 
 };
 

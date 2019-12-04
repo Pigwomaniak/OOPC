@@ -10,6 +10,10 @@
 rcMatrix::rcMatrix(const Size& size) {
     refCount = 1;
     this->size = size;
+    if(this->size.isZero()){
+        tab = nullptr;
+        return ;
+    }
     tab = new double* [size.x];
     for (unsigned int i = 0; i < size.x; ++i) {
         tab[i] = new double[size.y];
@@ -36,6 +40,25 @@ rcMatrix::rcMatrix(const rcMatrix& src, const Size& newSize) {
     for (unsigned int i = 0; i < src.size.x; ++i) {
         for(unsigned int j = 0; j < src.size.y; ++j){
             tab[i][j] = src.tab[i][j];
+        }
+    }
+}
+
+rcMatrix::rcMatrix(const double element) {
+    size = Size{1, 1};
+    tab = new double* [1];
+    tab[0] = new double [1];
+    tab[0][0] = element;
+}
+
+rcMatrix::rcMatrix(const Size &size, const double element) {
+    refCount = 1;
+    this->size = size;
+    tab = new double* [size.x];
+    for (unsigned int i = 0; i < size.x; ++i) {
+        tab[i] = new double[size.y];
+        for(unsigned int j = 0; j < size.y; ++j){
+            tab[i][j] = element;
         }
     }
 }
@@ -96,8 +119,10 @@ void rcMatrix::resize(Size newSize) {
 }
 
 void rcMatrix::freeTab() {
-    for (unsigned int i = 0; i < size.x; ++i) {
-        delete[] tab[i];
+    if(tab){
+        for (unsigned int i = 0; i < size.x; ++i) {
+            delete[] tab[i];
+        }
     }
     delete[] tab;
 
@@ -134,19 +159,36 @@ std::ostream &operator<<(std::ostream &out, const rcMatrix &src) {
 
 void rcMatrix::readFromFile(const char *fileName) {
     std::ifstream file;
-    file.open(fileName, std::ios::in);
+    file.open(fileName, std::ifstream::in);
     if(!file.is_open() || !file.good()){
         //throw
     }
-    int x;
-    int y;
-    file >> x;
-    file >> y;
-    for (unsigned int i = 0; i < size.x; ++i) {
-        for (unsigned int j = 0; j < size.y; ++j) {
-            file >> tab[i][j];
+    file >> size.y;
+    file >> size.x;
+    freeTab();
+    newTab();
+    for (unsigned int i = 0; i < size.y; ++i) {
+        for (unsigned int j = 0; j < size.x; ++j) {
+            file >> tab[j][i];
         }
     }
     file.close();
 }
+
+bool rcMatrix::isSameMatrix(const rcMatrix &second) const {
+    if(size != second.size){
+        return false;
+
+    }
+    for (unsigned int i = 0; i < size.x; ++i) {
+        for (unsigned int j = 0; j < size.y; ++j) {
+            if(tab[i][j] != second.tab[i][j]){
+                return false;
+            }
+        }
+    }
+}
+
+
+
 

@@ -71,7 +71,7 @@ void testReadFromFile(Matrix& m2x3, Matrix& m3x3){
     m2x3.readFromFile("matrix_2x3.txt");
     m3x3.readFromFile("matrix_3x3.txt");
 }
-/*
+
 void testComparison(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     Matrix t1 = m2x2;
     assert(t1 == t1);
@@ -93,7 +93,7 @@ void testComparison(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     assert(t3 != 6);
     assert(6 != t3);
 }
-
+/*
 void testAdd(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     Matrix t1, t2;
     t1 = 1 + m2x2;

@@ -23,4 +23,3 @@ public:
     friend Poly operator * (const Poly& prev, const Poly& src);
     friend Poly operator - (const Poly& src);
 };
-do cz

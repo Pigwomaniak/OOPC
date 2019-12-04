@@ -13,6 +13,7 @@ public:
     Matrix();
     Matrix(const Matrix& src);
     Matrix(const Size& size);
+    Matrix(const double element);
     Matrix& operator = (const Matrix& src);
     ~Matrix();
     double operator()(unsigned int x, unsigned int y) const;
@@ -23,4 +24,12 @@ public:
 
     friend  std::ostream& operator << (std::ostream& out, const Matrix& src);
     void readFromFile(const char* fileName);
+    bool isSameMatrix(const Matrix& second) const;
+
+    friend Matrix operator + (const Matrix& prev, const Matrix& sec);
+    //friend Matrix operator + (const double& prev, const Matrix& sec);
 };
+
+bool operator == (const Matrix& first, const Matrix& second);
+bool operator != (const Matrix& first, const Matrix& second);
+

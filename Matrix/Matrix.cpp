@@ -14,7 +14,17 @@ Matrix::Matrix(const Matrix &src) {
     data = src.data;
 }
 
+Matrix::Matrix(const double element) {
+    data = new rcMatrix(element);
+}
+
 Matrix &Matrix::operator=(const Matrix &src) {
+    data->refCountDecrease();
+    if(data->getRefCount() == 0){
+        delete data;
+    }
+    src.data->refCountIncrease();
+    data = src.data;
     return *this;
 }
 
@@ -50,7 +60,6 @@ void Matrix::checkRange(unsigned int x, unsigned int y) const {
 }
 
 Cref Matrix::operator()(unsigned int x, unsigned int y) {
-
     return Cref(*this, x, y);
 }
 
@@ -63,4 +72,27 @@ void Matrix::readFromFile(const char *fileName) {
     data->readFromFile(fileName);
 }
 
+Matrix operator+(const Matrix &prev, const Matrix &sec) {
+    if(prev.data->getSize().isOne()){
 
+    }
+    if(sec.data->getSize().isOne()){
+
+    }
+    return Matrix();
+}
+
+bool Matrix::isSameMatrix(const Matrix &second) const {
+    if(data == second.data){
+        return true;
+    }
+    return data->isSameMatrix(*second.data);
+}
+
+
+bool operator==(const Matrix &first, const Matrix &second) {
+    return first.isSameMatrix(second);
+}
+bool operator!=(const Matrix &first, const Matrix &second) {
+    return !first.isSameMatrix(second);
+}

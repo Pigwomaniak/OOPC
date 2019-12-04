@@ -1,10 +1,10 @@
 #include "Size.h"
 
-bool Size::operator==(const Size second) {
+bool Size::operator==(const Size second) const {
     return (x == second.x && y == second.y);
 }
 
-bool Size::operator!=(const Size second) {
+bool Size::operator!=(const Size second) const {
     return (x != second.x || y != second.y);
 }
 
@@ -25,4 +25,8 @@ Size::Size(unsigned int x, unsigned int y) {
 
 bool Size::isZero() {
     return (x == 0 && y == 0);
+}
+
+bool Size::isOne() {
+    return (x == 1 && y == 1);
 }

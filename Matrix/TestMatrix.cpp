@@ -48,12 +48,12 @@ void testFinal(){
     testReadFromFile(m2x3, m3x3);
     display(m2x2, m2x3, m3x3);
     testComparison(m2x2, m2x3, m3x3);
-    //testAdd(m2x2, m2x3, m3x3);
-    //testSubstract(m2x2, m2x3, m3x3);
-    //testAddEqual(m2x2, m2x3, m3x3);
-    //testSubstractEqual(m2x2, m2x3, m3x3);
-    //testMultiply(m2x2, m2x3, m3x3);
-    //testMultiplyEqual(m2x2, m2x3, m3x3);
+    testAdd(m2x2, m2x3, m3x3);
+    testSubstract(m2x2, m2x3, m3x3);
+    testAddEqual(m2x2, m2x3, m3x3);
+    testSubstractEqual(m2x2, m2x3, m3x3);
+    testMultiply(m2x2, m2x3, m3x3);
+    testMultiplyEqual(m2x2, m2x3, m3x3);
 }
 
 
@@ -70,6 +70,7 @@ void display(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
 void testReadFromFile(Matrix& m2x3, Matrix& m3x3){
     m2x3.readFromFile("matrix_2x3.txt");
     m3x3.readFromFile("matrix_3x3.txt");
+    cout << "Read from file OK" << endl;
 }
 
 void testComparison(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
@@ -92,20 +93,37 @@ void testComparison(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     assert(5 == t3);
     assert(t3 != 6);
     assert(6 != t3);
+    cout << "Comparison OK" << endl;
 }
-/*
+
 void testAdd(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
-    Matrix t1, t2;
+    Matrix t1, t2(Size{2, 2}), t3;
     t1 = 1 + m2x2;
+    t3 = m2x2 + 1;
     t2(0, 0) = 1;
     t2(0, 1) = 1;
     t2(1, 0) = 1;
     t2(1, 1) = 1;
-    assert(t1 = m2x2 + t2);
+    assert(t1 == (m2x2 + t2));
+    assert(t3 == (m2x2 + t2));
+    assert((m2x2 + t2)(1, 1) == 5);
+    cout << "Add OK" << endl;
 }
 
-void testSubstract(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
 
+void testSubstract(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
+    Matrix t1(Size{1, 1}), t2(Size{2, 2}), t3;
+    t1 = (1 - m2x2);
+    cout << "t1" << endl << t1 << endl;
+    t3 = m2x2 - 1;
+    t2(0, 0) = 1;
+    t2(0, 1) = 1;
+    t2(1, 0) = 1;
+    t2(1, 1) = 1;
+    //cout << t1 << (t2 - m2x2);
+    assert(t1 == (t2 - m2x2));
+    assert(t3 == (m2x2 - t2));
+    assert((m2x2 - t2)(1, 1) == 3);
 }
 
 void testMultiply(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
@@ -122,4 +140,3 @@ void testSubstractEqual(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3
 void testMultiplyEqual(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
 
 }
- */

@@ -11,5 +11,7 @@ private:
 public:
     Cref(Matrix &matrix, unsigned int newX, unsigned int newY): matrix(matrix), x(newX), y(newY){};
     Cref&operator = (double element);
+    operator double () const;
+
 
 };

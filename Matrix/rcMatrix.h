@@ -2,9 +2,9 @@
 
 #include <iosfwd>
 #include "Size.h"
+#include "Matrix.h"
+
 #include <iostream>
-
-
 
 class rcMatrix {
 private:
@@ -33,10 +33,9 @@ public:
     friend std::ostream& operator << (std::ostream& out, const rcMatrix& src);
     void readFromFile(const char* fileName);
     bool isSameMatrix(const rcMatrix& second) const ;
+    void addToMatrix(double element);
+    void addToMatrix(const rcMatrix& matrix);
+    void substractToMatrix(double element);
+    void substractToMatrix(const rcMatrix& matrix);
 
 };
-
-
-
-
-

@@ -186,6 +186,39 @@ bool rcMatrix::isSameMatrix(const rcMatrix &second) const {
             }
         }
     }
+    return true;
+}
+
+void rcMatrix::addToMatrix(double element) {
+    for (unsigned int i = 0; i < size.x; ++i) {
+        for (unsigned int j = 0; j < size.y; ++j) {
+            tab[i][j] += element;
+        }
+    }
+}
+
+void rcMatrix::addToMatrix(const rcMatrix &matrix) {
+    for (unsigned int i = 0; i < size.x; ++i) {
+        for (unsigned int j = 0; j < size.y; ++j) {
+            tab[i][j] += matrix.tab[i][j];
+        }
+    }
+}
+
+void rcMatrix::substractToMatrix(double element) {
+    for (unsigned int i = 0; i < size.x; ++i) {
+        for (unsigned int j = 0; j < size.y; ++j) {
+            tab[i][j] -= element;
+        }
+    }
+}
+
+void rcMatrix::substractToMatrix(const rcMatrix &matrix) {
+    for (unsigned int i = 0; i < size.x; ++i) {
+        for (unsigned int j = 0; j < size.y; ++j) {
+            tab[i][j] -= matrix.tab[i][j];
+        }
+    }
 }
 
 

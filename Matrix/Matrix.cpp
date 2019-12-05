@@ -121,10 +121,11 @@ Matrix operator-(const Matrix &prev, const Matrix &sec) {
     if (prev.canAdd(sec)){
         //throw cant add;
     }
-    if(prev.data->getSize().isOne() && !sec.data->getSize().isOne()){
+    if(prev.data->getSize().isOne() && !sec.data->getSize().isOne()){ // dodć zmianę znaku np przez mnożenie
         Matrix out(sec);
         out.data = out.data->detach();
-        out.data->substractToMatrix(prev(0, 0));
+        out.data->multiplyTabBy(-1);
+        out.data->addToMatrix(prev(0, 0));
         return out;
     }
     if(sec.data->getSize().isOne() && !prev.data->getSize().isOne()){

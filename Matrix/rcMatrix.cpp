@@ -49,6 +49,7 @@ rcMatrix::rcMatrix(const double element) {
     tab = new double* [1];
     tab[0] = new double [1];
     tab[0][0] = element;
+    refCount = 1;
 }
 
 rcMatrix::rcMatrix(const Size &size, const double element) {
@@ -217,6 +218,14 @@ void rcMatrix::substractToMatrix(const rcMatrix &matrix) {
     for (unsigned int i = 0; i < size.x; ++i) {
         for (unsigned int j = 0; j < size.y; ++j) {
             tab[i][j] -= matrix.tab[i][j];
+        }
+    }
+}
+
+void rcMatrix::multiplyTabBy(double element) {
+    for (unsigned int i = 0; i < size.x; ++i) {
+        for (unsigned int j = 0; j < size.y; ++j) {
+            tab[i][j] *= element;
         }
     }
 }

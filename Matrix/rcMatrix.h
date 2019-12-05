@@ -19,8 +19,8 @@ private:
 public:
     rcMatrix(const Size& size);
     rcMatrix(const rcMatrix& src, const Size& NewSize);
-    rcMatrix(const double element);
-    rcMatrix(const Size& size, const double element);
+    rcMatrix(double element);
+    rcMatrix(const Size& size, double element);
     rcMatrix* detach();
     ~rcMatrix();
     void refCountIncrease();
@@ -37,5 +37,6 @@ public:
     void addToMatrix(const rcMatrix& matrix);
     void substractToMatrix(double element);
     void substractToMatrix(const rcMatrix& matrix);
+    void multiplyTabBy(double element);
 
 };

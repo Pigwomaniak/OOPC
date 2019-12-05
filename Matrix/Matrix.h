@@ -13,7 +13,7 @@ public:
     Matrix();
     Matrix(const Matrix& src);
     Matrix(const Size& size);
-    Matrix(const double element);
+    Matrix(double element);
     Matrix& operator = (const Matrix& src);
     ~Matrix();
     double operator()(unsigned int x, unsigned int y) const;

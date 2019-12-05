@@ -114,16 +114,15 @@ void testAdd(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
 void testSubstract(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
     Matrix t1(Size{1, 1}), t2(Size{2, 2}), t3;
     t1 = (1 - m2x2);
-    cout << "t1" << endl << t1 << endl;
     t3 = m2x2 - 1;
     t2(0, 0) = 1;
     t2(0, 1) = 1;
     t2(1, 0) = 1;
     t2(1, 1) = 1;
-    //cout << t1 << (t2 - m2x2);
     assert(t1 == (t2 - m2x2));
     assert(t3 == (m2x2 - t2));
     assert((m2x2 - t2)(1, 1) == 3);
+    cout << "Substract OK" << endl;
 }
 
 void testMultiply(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){

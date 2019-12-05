@@ -140,3 +140,35 @@ Matrix operator-(const Matrix &prev, const Matrix &sec) {
     return out;
 }
 
+bool Matrix::canMultiply(const Matrix &sec) const {
+    if(data->getSize().x == sec.data->getSize().y){
+        return true;
+    }
+    if(data->getSize().isOne() || sec.data->getSize().isOne()){
+        return true;
+    }
+    return false;
+}
+
+
+Matrix operator*(const Matrix &prev, const Matrix &sec) {
+    if(prev.canMultiply(sec)){
+        // throw
+    }
+    if(prev.data->getSize().isOne() && !sec.data->getSize().isOne()){
+        Matrix out(sec);
+        out.data = out.data->detach();
+        out.data->multiplyTabBy(prev(0, 0));
+        return out;
+    }
+    if(!prev.data->getSize().isOne() && sec.data->getSize().isOne()){
+        Matrix out(prev);
+        out.data = out.data->detach();
+        out.data->multiplyTabBy(sec(0, 0));
+        return out;
+    }
+    Matrix out (Size{sec.data->getSize().x, prev.data->getSize().y});
+    out.data->multiplyTabByTab(*prev.data, *sec.data);
+
+    return out;
+}

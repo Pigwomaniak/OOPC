@@ -84,11 +84,11 @@ void rcMatrix::refCountIncrease() {
     refCount++;
 }
 
-Size rcMatrix::getSize() {
+Size rcMatrix::getSize() const {
     return size;
 }
 
-unsigned int rcMatrix::getRefCount() {
+unsigned int rcMatrix::getRefCount() const {
     return refCount;
 }
 
@@ -96,7 +96,7 @@ void rcMatrix::refCountDecrease() {
     refCount--;
 }
 
-double rcMatrix::readElement(unsigned int x, unsigned int y) {
+double rcMatrix::readElement(unsigned int x, unsigned int y) const {
     return tab[x][y];
 }
 
@@ -107,7 +107,7 @@ void rcMatrix::writeElement(double element, unsigned int x, unsigned int y) {
     tab[x][y] = element;
 }
 
-bool rcMatrix::inRange(unsigned int x, unsigned int y) {
+bool rcMatrix::inRange(unsigned int x, unsigned int y) const {
     return (size.x > x && size.y > y);
 }
 
@@ -226,6 +226,16 @@ void rcMatrix::multiplyTabBy(double element) {
     for (unsigned int i = 0; i < size.x; ++i) {
         for (unsigned int j = 0; j < size.y; ++j) {
             tab[i][j] *= element;
+        }
+    }
+}
+
+void rcMatrix::multiplyTabByTab(const rcMatrix &prev, const rcMatrix &sec) {
+    for (unsigned int i = 0; i < size.x; ++i) {
+        for (unsigned int j = 0; j < size.y; ++j) {
+            for (unsigned int a = 0; a < prev.getSize().x; ++a) {
+                tab[i][j] += prev.tab[a][j] * sec.tab[i][a];
+            }
         }
     }
 }

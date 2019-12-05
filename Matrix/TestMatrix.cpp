@@ -126,7 +126,11 @@ void testSubstract(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
 }
 
 void testMultiply(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
-
+    Matrix m1 = m2x3 * m3x3 * m3x3;
+    assert(m1(1, 1) == 38);
+    assert(m1(1, 0) == -38);
+    assert(m1(0, 0) == -321);
+    cout << "Multiply OK" << endl;
 }
 
 void testAddEqual(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){

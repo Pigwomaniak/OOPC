@@ -25,11 +25,11 @@ public:
     ~rcMatrix();
     void refCountIncrease();
     void refCountDecrease();
-    Size getSize();
-    unsigned int getRefCount();
-    double readElement(unsigned int x, unsigned int y);
+    Size getSize() const ;
+    unsigned int getRefCount() const;
+    double readElement(unsigned int x, unsigned int y) const;
     void writeElement(double element, unsigned int x, unsigned int y);
-    bool inRange(unsigned int x, unsigned int y);
+    bool inRange(unsigned int x, unsigned int y) const;
     friend std::ostream& operator << (std::ostream& out, const rcMatrix& src);
     void readFromFile(const char* fileName);
     bool isSameMatrix(const rcMatrix& second) const ;
@@ -38,5 +38,6 @@ public:
     void substractToMatrix(double element);
     void substractToMatrix(const rcMatrix& matrix);
     void multiplyTabBy(double element);
+    void multiplyTabByTab(const rcMatrix& prev, const rcMatrix& sec);
 
 };

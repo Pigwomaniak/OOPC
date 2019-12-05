@@ -26,9 +26,11 @@ public:
     void readFromFile(const char* fileName);
     bool isSameMatrix(const Matrix& second) const;
     bool canAdd(const Matrix& sec) const ;
+    bool canMultiply(const Matrix& sec) const;
 
     friend Matrix operator + (const Matrix& prev, const Matrix& sec);
     friend Matrix operator - (const Matrix& prev, const Matrix& sec);
+    friend Matrix operator * (const Matrix& prev, const Matrix& sec);
 };
 
 bool operator == (const Matrix& first, const Matrix& second);

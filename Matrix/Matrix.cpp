@@ -6,7 +6,15 @@
 using namespace std;
 
 Matrix::Matrix() {
-    data = new rcMatrix(Size{0, 0});
+    try {
+        data = new rcMatrix(Size{0, 0});
+    }
+    catch (bad_alloc& e){
+        cout << e.what();
+        delete [] data;
+        throw ;
+    }
+
 }
 
 Matrix::Matrix(const Matrix &src) {
@@ -15,7 +23,15 @@ Matrix::Matrix(const Matrix &src) {
 }
 
 Matrix::Matrix(const double element) {
-    data = new rcMatrix(element);
+    try{
+        data = new rcMatrix(element);
+    }
+    catch (bad_alloc& e){
+        cout << e.what();
+        delete [] data;
+        throw ;
+    }
+
 }
 
 Matrix &Matrix::operator=(const Matrix &src) {
@@ -54,8 +70,8 @@ double Matrix::operator()(unsigned int x, unsigned int y) const {
 }
 
 void Matrix::checkRange(unsigned int x, unsigned int y) const {
-    if(data->inRange(x, y)){
-        //throw
+    if(!data->inRange(x, y)){
+        throw Wrong_size_of_matrix();
     }
 }
 
@@ -73,8 +89,9 @@ void Matrix::readFromFile(const char *fileName) {
 }
 
 Matrix operator + (const Matrix &prev, const Matrix &sec) {
-    if (prev.canAdd(sec)){
-        //throw cant add;
+    if (!prev.canAdd(sec)){
+        throw Wrong_size_of_matrix();
+
     }
     if(prev.data->getSize().isOne() && !sec.data->getSize().isOne()){
         Matrix out(sec);
@@ -118,8 +135,8 @@ bool Matrix::canAdd(const Matrix &sec) const {
     return false;
 }
 Matrix operator-(const Matrix &prev, const Matrix &sec) {
-    if (prev.canAdd(sec)){
-        //throw cant add;
+    if (!prev.canAdd(sec)){
+        throw Wrong_size_of_matrix();
     }
     if(prev.data->getSize().isOne() && !sec.data->getSize().isOne()){ // dodć zmianę znaku np przez mnożenie
         Matrix out(sec);
@@ -152,8 +169,8 @@ bool Matrix::canMultiply(const Matrix &sec) const {
 
 
 Matrix operator*(const Matrix &prev, const Matrix &sec) {
-    if(prev.canMultiply(sec)){
-        // throw
+    if(!prev.canMultiply(sec)){
+        throw Wrong_size_of_matrix();
     }
     if(prev.data->getSize().isOne() && !sec.data->getSize().isOne()){
         Matrix out(sec);

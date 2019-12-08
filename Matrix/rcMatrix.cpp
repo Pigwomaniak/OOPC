@@ -162,7 +162,7 @@ void rcMatrix::readFromFile(const char *fileName) {
     std::ifstream file;
     file.open(fileName, std::ifstream::in);
     if(!file.is_open() || !file.good()){
-        //throw
+        throw File_read_fail();
     }
     file >> size.y;
     file >> size.x;

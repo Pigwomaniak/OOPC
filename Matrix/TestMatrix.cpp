@@ -134,12 +134,26 @@ void testMultiply(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
 }
 
 void testAddEqual(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
-
+    Matrix t1 = m2x2;
+    t1 += 1;
+    Matrix t2 = t1 - 1;
+    assert(m2x2 == t2);
+    cout << "Add equal OK" << endl;
 }
-
 void testSubstractEqual(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
-
+    Matrix t1 = m2x2;
+    t1 -= 1;
+    Matrix t2 = t1 + 1;
+    assert(m2x2 == t2);
+    cout << "Add equal OK" << endl;
 }
 void testMultiplyEqual(const Matrix& m2x2, const Matrix& m2x3, const Matrix& m3x3){
-
+    Matrix t1 = m2x2;
+    t1 *= 1;
+    assert(m2x2 == t1);
+    Matrix t2 = m2x3;
+    t2 *= m3x3;
+    Matrix t3 = m2x3 * m3x3;
+    assert(t2 == t3);
+    cout << "multiply equal OK" << endl;
 }

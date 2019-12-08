@@ -41,3 +41,5 @@ public:
     void multiplyTabByTab(const rcMatrix& prev, const rcMatrix& sec);
 
 };
+
+

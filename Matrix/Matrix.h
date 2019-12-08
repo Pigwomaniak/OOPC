@@ -31,6 +31,11 @@ public:
     friend Matrix operator + (const Matrix& prev, const Matrix& sec);
     friend Matrix operator - (const Matrix& prev, const Matrix& sec);
     friend Matrix operator * (const Matrix& prev, const Matrix& sec);
+
+    Matrix&operator += (const Matrix& src);
+    Matrix&operator -= (const Matrix& src);
+    Matrix&operator *= (const Matrix& src);
+
 };
 
 bool operator == (const Matrix& first, const Matrix& second);

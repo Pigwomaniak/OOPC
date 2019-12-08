@@ -172,3 +172,18 @@ Matrix operator*(const Matrix &prev, const Matrix &sec) {
 
     return out;
 }
+
+Matrix &Matrix::operator+=(const Matrix &src) {
+    *this = *this + src;
+    return *this;
+}
+
+Matrix &Matrix::operator-=(const Matrix &src) {
+    *this = *this - src;
+    return *this;
+}
+
+Matrix &Matrix::operator*=(const Matrix &src) {
+    *this = *this * src;
+    return *this;
+}

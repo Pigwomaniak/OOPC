@@ -6,12 +6,12 @@
 class rcMatrix;
 class Cref;
 class Wrong_size_of_matrix : public std::exception {
-    virtual const char* what () const throw () {
+public:virtual const char* what () const throw () {
         return "Matrices have invalid dimensions for this operation.";
     }
 };
 class File_read_fail : public std::exception {
-    virtual const char* what () const throw () {
+public:virtual const char* what () const throw () {
         return "File could not been read";
     }
 };

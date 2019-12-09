@@ -44,16 +44,40 @@ void testFinal(){
     m2x2(0, 1) = 2;
     m2x2(1, 0) = 3;
     m2x2(1, 1) = 4;
-
-    testReadFromFile(m2x3, m3x3);
+    try {
+        testReadFromFile(m2x3, m3x3);
+    }
+    catch(File_read_fail& e) {
+        cout << e.what() << endl;
+    }
     display(m2x2, m2x3, m3x3);
-    testComparison(m2x2, m2x3, m3x3);
-    testAdd(m2x2, m2x3, m3x3);
-    testSubstract(m2x2, m2x3, m3x3);
-    testAddEqual(m2x2, m2x3, m3x3);
-    testSubstractEqual(m2x2, m2x3, m3x3);
-    testMultiply(m2x2, m2x3, m3x3);
-    testMultiplyEqual(m2x2, m2x3, m3x3);
+    try {
+        testComparison(m2x2, m2x3, m3x3);
+    }
+    catch(Wrong_size_of_matrix& e) {
+        cout << e.what() << endl;
+    }
+    try {
+        testAdd(m2x2, m2x3, m3x3);
+        testAddEqual(m2x2, m2x3, m3x3);
+    }
+    catch(Wrong_size_of_matrix& e) {
+        cout << e.what() << endl;
+    }
+    try {
+        testSubstract(m2x2, m2x3, m3x3);
+        testSubstractEqual(m2x2, m2x3, m3x3);
+    }
+    catch(Wrong_size_of_matrix& e) {
+        cout << e.what() << endl;
+    }
+    try {
+        testMultiply(m2x2, m2x3, m3x3);
+        testMultiplyEqual(m2x2, m2x3, m3x3);
+    }
+    catch(Wrong_size_of_matrix& e) {
+        cout << e.what() << endl;
+    }
 }
 
 

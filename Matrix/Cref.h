@@ -3,8 +3,9 @@
 #include "Matrix.h"
 class Matrix;
 class Cref {
-    friend class Matrix;
+    
 private:
+	friend class Matrix;
     Matrix& matrix;
     unsigned int x;
     unsigned int y;

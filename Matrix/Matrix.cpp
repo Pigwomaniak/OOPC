@@ -1,6 +1,7 @@
 #include <fstream>
 #include <sstream>
 #include "Matrix.h"
+//#include "Cref.h"
 
 
 using namespace std;
@@ -94,21 +95,34 @@ Matrix operator + (const Matrix &prev, const Matrix &sec) {
 
     }
     if(prev.data->getSize().isOne() && !sec.data->getSize().isOne()){
+		/*
         Matrix out(sec);
         out.data = out.data->detach();
         out.data->addToMatrix(prev(0, 0));
         return out;
+		*/
+		return prev.addOneMat(prev, sec);
     }
     if(sec.data->getSize().isOne() && !prev.data->getSize().isOne()){
-        Matrix out(prev);
+        /*
+		Matrix out(prev);
         out.data = out.data->detach();
         out.data->addToMatrix(sec(0, 0));
         return out;
+		*/
+		return prev.addOneMat(sec, prev);
     }
     Matrix out(prev);
     out.data = out.data->detach();
     out.data->addToMatrix(*sec.data);
     return out;
+}
+
+Matrix Matrix:: addOneMat(const Matrix& one, const Matrix& big) const {
+	Matrix out(big);
+	out.data = out.data->detach();
+	out.data->addToMatrix(one(0, 0));
+	return out;
 }
 
 bool Matrix::isSameMatrix(const Matrix &second) const {
@@ -118,11 +132,11 @@ bool Matrix::isSameMatrix(const Matrix &second) const {
     return data->isSameMatrix(*second.data);
 }
 
-bool operator==(const Matrix &first, const Matrix &second) {
-    return first.isSameMatrix(second);
+bool Matrix :: operator==(/*const Matrix &first, */const Matrix &second) {
+    return this->isSameMatrix(second);//first.isSameMatrix(second);
 }
-bool operator!=(const Matrix &first, const Matrix &second) {
-    return !first.isSameMatrix(second);
+bool Matrix :: operator!=(/*const Matrix &first, */const Matrix &second) {
+    return !this->isSameMatrix(second);//!first.isSameMatrix(second);
 }
 bool Matrix::canAdd(const Matrix &sec) const {
     if(data->getSize().isZero() || sec.data->getSize().isZero()){

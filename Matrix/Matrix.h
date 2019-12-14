@@ -28,6 +28,8 @@ private:
 	void write(double element, unsigned int x, unsigned int y);
 	void checkRange(unsigned int x, unsigned int y) const;
 	bool isSameMatrix(const Matrix& second) const;
+    bool canAdd(const Matrix& sec) const ;
+    bool canMultiply(const Matrix& sec) const;
 	
 public:
     Matrix();
@@ -45,8 +47,8 @@ public:
     friend  std::ostream& operator << (std::ostream& out, const Matrix& src);
     void readFromFile(const char* fileName);
     //bool isSameMatrix(const Matrix& second) const;
-    bool canAdd(const Matrix& sec) const ;
-    bool canMultiply(const Matrix& sec) const;
+    //bool canAdd(const Matrix& sec) const ;
+    //bool canMultiply(const Matrix& sec) const;
 
     friend Matrix operator + (const Matrix& prev, const Matrix& sec);
     friend Matrix operator - (const Matrix& prev, const Matrix& sec);
@@ -56,8 +58,8 @@ public:
     Matrix&operator -= (const Matrix& src);
     Matrix&operator *= (const Matrix& src);
     
-	bool operator == (const Matrix& second);
-	bool operator != (const Matrix& second);
+	bool operator == (const Matrix& second) const;
+	bool operator != (const Matrix& second) const;
 
 };
 /*

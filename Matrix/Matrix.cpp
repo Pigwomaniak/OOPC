@@ -132,10 +132,10 @@ bool Matrix::isSameMatrix(const Matrix &second) const {
     return data->isSameMatrix(*second.data);
 }
 
-bool Matrix :: operator==(/*const Matrix &first, */const Matrix &second) {
+bool Matrix :: operator==(/*const Matrix &first, */const Matrix &second) const{
     return this->isSameMatrix(second);//first.isSameMatrix(second);
 }
-bool Matrix :: operator!=(/*const Matrix &first, */const Matrix &second) {
+bool Matrix :: operator!=(/*const Matrix &first, */const Matrix &second) const{
     return !this->isSameMatrix(second);//!first.isSameMatrix(second);
 }
 bool Matrix::canAdd(const Matrix &sec) const {

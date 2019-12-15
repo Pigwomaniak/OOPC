@@ -39,6 +39,15 @@ public:
         first = nullptr;
         //current = nullptr;
     }
+    Map(const Map& src){
+        last = nullptr;
+        first = nullptr;
+        Cell* current = src.first;
+        while (current){
+            add(current->key, *current->element);
+            current = current->next;
+        }
+    }
 
     ~Map(){
         Cell* current = first;
@@ -51,8 +60,9 @@ public:
     }
 
     void add(const kType& key, const eType element){
-        if(!checkKeyExist(key)){
+        if(checkKeyExist(key)){
             cout << "KEY exist\n";
+            return;
         }
         if(last){
             last->next = new Cell(key, new eType(element));
@@ -84,7 +94,16 @@ public:
     }
 
     Map& operator = (const Map& src){
-        Cell* current = src.first;
+        Cell* current = first;
+        Cell* temp;
+        while (current){
+            temp = current->next;
+            delete current;
+            current = temp;
+        }
+        first = nullptr;
+        last = nullptr;
+        current = src.first;
         while (current){
             add(current->key, *current->element);
             current = current->next;

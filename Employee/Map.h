@@ -84,7 +84,7 @@ public:
         return nullptr;
     }
 
-    friend ostream&operator << (ostream& out, const Map& src){
+    friend ostream& operator << (ostream& out, const Map& src){
         Cell* current= src.first;
         while (current){
             out << current->key << "\n" << *current->element << endl;

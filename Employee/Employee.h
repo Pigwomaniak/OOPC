@@ -16,7 +16,7 @@ public:
     Employee(string  newName, string  newPosition, const int newAge)
     :name(std::move(newName)), position(std::move(newPosition)), age(newAge){};
 
-    friend ostream&operator << (ostream& out, const Employee& src){
+    friend ostream& operator << (ostream& out, const Employee& src){
         out << src.name << "\t" << src.position << "\t" << src.age << endl;
         return out;
     }

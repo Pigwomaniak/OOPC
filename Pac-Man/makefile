@@ -1,8 +1,8 @@
 # List your *.h files here:
-headers = Map.h Employee.h
+headers = 
 
 # List your *.cpp files here:
-sources = TestMap.cpp
+sources = 
 
 program: $(headers) $(sources)
 	g++ -g -Wall -pedantic $(sources) -o program
@@ -17,3 +17,4 @@ check: program
 
 debug: program
 	gdb program
+

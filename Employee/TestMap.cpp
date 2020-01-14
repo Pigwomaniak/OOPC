@@ -1,6 +1,7 @@
 #include "Map.h"														// Defines template Map<Key, Value>
 #include "Employee.h"													// Defines class Employee
 #include <iostream>
+#include <cassert>
 
 typedef unsigned int ID; 												// Identification number of employee
 typedef Map<ID, Employee> Database; 									// Database of employees
@@ -9,6 +10,7 @@ using namespace std;
 
 void addEmployees(Database& database);
 void modifyEmployees(Database& database);
+void specjalCases(Database& database);
 
 int main() {
 	Database database;
@@ -24,6 +26,7 @@ int main() {
 	database = newDatabase;												// Update original database (assignment operator called)
 
 	cout << "Database after the assignment:" << endl << database << endl;
+	specjalCases(database);
     return 0;
 }
 
@@ -41,4 +44,10 @@ void modifyEmployees(Database& database) {
 	
 	pE = database.find(761028073);										// Find employee using its ID
 	pE->age = 29;														// Modify the age of employee
+}
+void specjalCases(Database& database){
+	Employee* pE;
+	database.add(761028073, Employee("Jan Kowalski", "salesman", 28));
+	pE = database.find(0101010);
+	assert(!pE);
 }

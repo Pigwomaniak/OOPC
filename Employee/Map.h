@@ -61,7 +61,7 @@ public:
 
     void add(const kType& key, const eType element){
         if(checkKeyExist(key)){
-            cout << "KEY exist\n";
+            //cout << "KEY exist\n";
             return;
         }
         if(last){

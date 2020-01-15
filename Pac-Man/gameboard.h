@@ -5,6 +5,8 @@
 #pragma once
 
 #include <QWidget>
+#include <QLCDNumber>
+class PlayField;
 
 class GameBoard : public QWidget
 {
@@ -12,18 +14,13 @@ Q_OBJECT
 
 public:
     GameBoard(QWidget *parent = 0);
-
-/*
 protected slots:
-    void fire();
-    void hit();
-    void missed();
+    void getPoint();
+    void newHighScore();
     void newGame();
 
-
 private:
-    QLCDNumber *hits;
-    QLCDNumber *shotsLeft;
-    CannonField *cannonField;
-*/
+    QLCDNumber *scoreLCD;
+    QLCDNumber *highScoreLCD;
+    PlayField *playField;
 };

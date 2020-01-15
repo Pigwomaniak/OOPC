@@ -4,10 +4,9 @@
 
 #pragma once
 
-class QTimer;
 
-class PlayField : public QWidget
-{
+class PlayField
+        : public QWidget{
 Q_OBJECT
 
 public:

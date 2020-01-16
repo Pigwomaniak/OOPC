@@ -24,3 +24,18 @@ void Grid::newGame() {
         }
     }
 }
+
+bool Grid::movCheck(QPoint pointToCheck) {
+    if((pointToCheck.x() < 0 || pointToCheck.x() >= X_GRID_SIZE) || ((pointToCheck.y() < 0 || pointToCheck.y() >= Y_GRID_SIZE))) return false;
+    Tile* tileToCheck = &grid[pointToCheck.y()][pointToCheck.x()];
+    if(tileToCheck->wall) return false;
+    return true;
+}
+
+bool Grid::checkSmallPoint(QPoint point) {
+    if(grid[point.y()][point.x()].smallPoint){
+        grid[point.y()][point.x()].smallPoint = false;
+        return true;
+    }
+    return false;
+}

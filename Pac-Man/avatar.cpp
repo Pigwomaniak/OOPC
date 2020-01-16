@@ -5,5 +5,6 @@
 #include "avatar.h"
 
 Avatar::Avatar() {
+    homePos = QPoint(13,23);
     gridPos =  QPoint(13,23);
 }

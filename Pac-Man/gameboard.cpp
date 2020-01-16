@@ -19,6 +19,8 @@
 GameBoard::GameBoard(QWidget *parent)
         : QWidget(parent) {
 
+    playField = new PlayField(this);
+
     //Quit
     QPushButton *quit = new QPushButton(tr("&Quit"), this);
     quit->setFont(QFont("Times", 18, QFont::Bold));
@@ -36,7 +38,7 @@ GameBoard::GameBoard(QWidget *parent)
     QVBoxLayout *scoreLayout = new QVBoxLayout;
     scoreLayout->addWidget(scoreLabel);
     scoreLayout->addWidget(scoreLCD);
-    //need connect
+    connect(playField, SIGNAL(getPoint()), this, SLOT(getPoint()));
 
     //High Score
     highScoreLCD = new QLCDNumber(2, this);
@@ -59,7 +61,7 @@ GameBoard::GameBoard(QWidget *parent)
     QHBoxLayout* bottomLayout = new QHBoxLayout;
 
 
-    playField = new PlayField(this);
+
 
     QVBoxLayout* mainLayout = new QVBoxLayout;
     mainLayout->addLayout(topLayout);
@@ -67,10 +69,10 @@ GameBoard::GameBoard(QWidget *parent)
     mainLayout->addLayout(bottomLayout);
     setLayout(mainLayout);
 
-    (void) new QShortcut(Qt::Key_W, playField, SLOT(movePacManUp()));
-    (void) new QShortcut(Qt::Key_S, playField, SLOT(movePacManDown()));
-    (void) new QShortcut(Qt::Key_D, playField, SLOT(movePacManRight()));
-    (void) new QShortcut(Qt::Key_A, playField, SLOT(movePacManLeft()));
+    (void) new QShortcut(Qt::Key_W, this, SLOT(movPacManUp()));
+    (void) new QShortcut(Qt::Key_S, this, SLOT(movPacManDown()));
+    (void) new QShortcut(Qt::Key_D, this, SLOT(movPacManRight()));
+    (void) new QShortcut(Qt::Key_A, this, SLOT(movPacManLeft()));
 }
 
 void GameBoard::newGame() {
@@ -87,4 +89,20 @@ void GameBoard::getPoint() {
     if(scoreLCD->intValue() >= highScoreLCD->intValue()){
         newHighScore();
     }
+}
+
+void GameBoard::movPacManUp() {
+    playField->movPacManUp();
+}
+
+void GameBoard::movPacManDown() {
+    playField->movPacManDown();
+}
+
+void GameBoard::movPacManRight() {
+    playField->movPacManRight();
+}
+
+void GameBoard::movPacManLeft() {
+    playField->movPacManLeft();
 }

@@ -13,9 +13,11 @@ public:
 
     inline QPoint getGridPos() { return gridPos;};
     inline void setGridPos(QPoint newPos) { gridPos = newPos;};
+    inline void goHome(){gridPos = homePos;};
     //inline QPoint getPixPos() { return pixPos;};
 
 protected:
+    QPoint homePos;
     QPoint gridPos;
     //QPoint pixPos;
 

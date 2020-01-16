@@ -16,6 +16,7 @@ public:
     PlayField(QWidget *parent = 0);
 
 
+
 public slots:
     void newGame();
     void movPacManUp();
@@ -24,9 +25,9 @@ public slots:
     void movPacManLeft();
 
 private slots:
-
+    void movPacMan();
 signals:
-
+    void getPoint();
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -39,6 +40,9 @@ private:
     QPixmap* pixMap;
     Grid* grid;
     Avatar* pacMan;
+    void pointCheck(QPoint toCheckPoint);
+
+    QTimer* timerPacMan;
 };
 
 

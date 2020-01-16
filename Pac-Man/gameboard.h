@@ -9,6 +9,7 @@
 
 class PlayField;
 
+
 class GameBoard : public QWidget
 {
 Q_OBJECT
@@ -19,6 +20,11 @@ protected slots:
     void getPoint();
     void newHighScore();
     void newGame();
+
+    void movPacManUp();
+    void movPacManDown();
+    void movPacManRight();
+    void movPacManLeft();
 
 private:
     QLCDNumber *scoreLCD;

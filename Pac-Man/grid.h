@@ -51,5 +51,8 @@ public:
     Grid();
     void newGame();
     std::vector<std::vector<Tile>> grid;
+    bool movCheck(QPoint pointToCheck);
+    bool checkSmallPoint(QPoint point);
+    inline bool checkBigPoint(QPoint point){ return grid[point.y()][point.x()].bigPoint;};
 
 };

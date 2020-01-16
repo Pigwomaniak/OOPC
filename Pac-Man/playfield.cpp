@@ -7,12 +7,15 @@
 #include <QPainter>
 #include <QBrush>
 #include <QWidget>
+#include <QShortcut>
+#include <QTimer>
 
 #include "playfield.h"
 
 PlayField::PlayField(QWidget *parent) : QWidget(parent){
     grid = new Grid;
     pacMan = new Avatar;
+    timerPacMan = new QTimer(this);
     pixMap = new QPixmap("fieldMap.jpg");
     setPalette(QPalette(QColor(100, 100, 200)));
     setAutoFillBackground(true);
@@ -22,15 +25,17 @@ PlayField::PlayField(QWidget *parent) : QWidget(parent){
 
 void PlayField::paintEvent(QPaintEvent * /* event */) {
     QPainter painter(this);
-    painter.drawPixmap(0,0, this->width(), this->height(), *pixMap);
+    //painter.drawPixmap(0,0, this->width(), this->height(), *pixMap);
     paintPoints();
-    paintPacMan();
+
     paintWalls();
+    paintPacMan();
 }
 
 void PlayField::newGame() {
     update();
     grid->newGame();
+    pacMan->goHome();
 }
 
 void PlayField::paintPoints() {
@@ -87,21 +92,51 @@ void PlayField::paintWalls() {
 }
 
 void PlayField::movPacManUp() {
-    pacMan->setGridPos(QPoint(pacMan->getGridPos().x(), pacMan->getGridPos().y() - 1));
-    update();
+    QPoint requestPos(pacMan->getGridPos().x(), pacMan->getGridPos().y() - 1);
+    if(grid->movCheck(requestPos)){
+        pacMan->setGridPos(requestPos);
+        update();
+    }
+    pointCheck(pacMan->getGridPos());
 }
 
 void PlayField::movPacManDown() {
-    pacMan->setGridPos(QPoint(pacMan->getGridPos().x(), pacMan->getGridPos().y() + 1));
-    update();
+    QPoint requestPos(pacMan->getGridPos().x(), pacMan->getGridPos().y() + 1);
+    if(grid->movCheck(requestPos)){
+        pacMan->setGridPos(requestPos);
+        update();
+    }
+    pointCheck(pacMan->getGridPos());
 }
 
 void PlayField::movPacManRight() {
-    pacMan->setGridPos(QPoint(pacMan->getGridPos().x() + 1, pacMan->getGridPos().y()));
-    update();
+    QPoint requestPos(pacMan->getGridPos().x() + 1, pacMan->getGridPos().y());
+    if(grid->movCheck(requestPos)){
+        pacMan->setGridPos(requestPos);
+        update();
+    }
+    pointCheck(pacMan->getGridPos());
 }
 
 void PlayField::movPacManLeft() {
-    pacMan->setGridPos(QPoint(pacMan->getGridPos().x() - 1, pacMan->getGridPos().y()));
-    update();
+    QPoint requestPos(pacMan->getGridPos().x() - 1, pacMan->getGridPos().y());
+    if(grid->movCheck(requestPos)){
+        pacMan->setGridPos(requestPos);
+        update();
+    }
+    pointCheck(pacMan->getGridPos());
 }
+
+void PlayField::pointCheck(QPoint toCheckPoint) {
+    if(grid->checkSmallPoint(toCheckPoint)){
+        emit getPoint();
+    }
+}
+
+
+void PlayField::movPacMan() {
+
+
+}
+
+

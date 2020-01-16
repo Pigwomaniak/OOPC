@@ -4,6 +4,9 @@
 
 #pragma once
 
+#include <QWidget>
+#include "grid.h"
+#include "avatar.h"
 
 class PlayField
         : public QWidget{
@@ -15,6 +18,10 @@ public:
 
 public slots:
     void newGame();
+    void movPacManUp();
+    void movPacManDown();
+    void movPacManRight();
+    void movPacManLeft();
 
 private slots:
 
@@ -23,10 +30,15 @@ signals:
 
 protected:
     void paintEvent(QPaintEvent *event);
+    void paintPoints();
+    void paintPacMan();
+    void paintWalls();
 
 
 private:
     QPixmap* pixMap;
+    Grid* grid;
+    Avatar* pacMan;
 };
 
 

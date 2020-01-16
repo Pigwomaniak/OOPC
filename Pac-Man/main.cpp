@@ -7,8 +7,6 @@
 #include "gameboard.h"
 
 
-
-
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -19,7 +17,7 @@ int main(int argc, char *argv[])
     app.installTranslator(&translator);
 
     GameBoard board;
-    board.setGeometry(100, 100, 500, 355);
+    board.setGeometry(200, 200, 800, 900);
     board.show();
     return app.exec();
 }

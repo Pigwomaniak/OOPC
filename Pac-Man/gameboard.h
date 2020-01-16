@@ -6,6 +6,7 @@
 
 #include <QWidget>
 #include <QLCDNumber>
+
 class PlayField;
 
 class GameBoard : public QWidget
@@ -23,4 +24,5 @@ private:
     QLCDNumber *scoreLCD;
     QLCDNumber *highScoreLCD;
     PlayField *playField;
+
 };

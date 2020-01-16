@@ -66,16 +66,25 @@ GameBoard::GameBoard(QWidget *parent)
     mainLayout->addWidget(playField);
     mainLayout->addLayout(bottomLayout);
     setLayout(mainLayout);
+
+    (void) new QShortcut(Qt::Key_W, playField, SLOT(movePacManUp()));
+    (void) new QShortcut(Qt::Key_S, playField, SLOT(movePacManDown()));
+    (void) new QShortcut(Qt::Key_D, playField, SLOT(movePacManRight()));
+    (void) new QShortcut(Qt::Key_A, playField, SLOT(movePacManLeft()));
 }
 
 void GameBoard::newGame() {
-
+    scoreLCD->display(0);
+    playField->newGame();
 }
 
 void GameBoard::newHighScore() {
-
+    highScoreLCD->display(scoreLCD->intValue());
 }
 
 void GameBoard::getPoint() {
-
+    scoreLCD->display(scoreLCD->intValue() + 1);
+    if(scoreLCD->intValue() >= highScoreLCD->intValue()){
+        newHighScore();
+    }
 }

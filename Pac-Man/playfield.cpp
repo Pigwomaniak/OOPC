@@ -8,7 +8,7 @@
 #include <QBrush>
 #include <QWidget>
 #include <QShortcut>
-#include <QTimer>
+//#include <QTimer>
 
 #include "playfield.h"
 
@@ -16,7 +16,12 @@ PlayField::PlayField(QWidget *parent) : QWidget(parent){
     grid = new Grid;
     pacMan = new Avatar;
     timerPacMan = new QTimer(this);
-    connect(timerPacMan, SIGNAL(timeout()), this, SLOT(movPacMan()));
+    connect(timerPacMan, SIGNAL(timeout()), this, SLOT(timeToMovPacMan()));
+
+    ghostSpeeder = new GhostSpeeder;
+    timerGhostSpeeder = new QTimer(this);
+    connect(timerGhostSpeeder, SIGNAL(timeout()), this, SLOT(timeToMovGhostSpider()));
+
     pixMap = new QPixmap("fieldMap.jpg");
     setPalette(QPalette(QColor(0, 0, 0)));
     setAutoFillBackground(true);
@@ -25,21 +30,31 @@ PlayField::PlayField(QWidget *parent) : QWidget(parent){
 
 
 void PlayField::paintEvent(QPaintEvent * /* event */) {
-    QPainter painter(this);
+    //QPainter painter(this);
     //painter.drawPixmap(0,0, this->width(), this->height(), *pixMap);
+    int xLength = width() / X_GRID_SIZE;
+    int yLength = height() / Y_GRID_SIZE;
+
     paintPoints();
 
     paintWalls();
-    paintPacMan();
+    paintAvatar(pacMan);
+    paintAvatar(ghostSpeeder);
+
 }
 
 void PlayField::newGame() {
-    grid->newGame();
-    pacMan->goHome();
     int xLength = width() / X_GRID_SIZE;
     int yLength = height() / Y_GRID_SIZE;
+    grid->newGame();
+    pacMan->goHome();
+
     pacMan->setAvatarPixPos(QPoint(pacMan->getGridPos().x() * xLength + xLength / 2,
                                    pacMan->getGridPos().y() * yLength + yLength / 2));
+
+    ghostSpeeder->goHome();
+    ghostSpeeder->setAvatarPixPos(QPoint(ghostSpeeder->getGridPos().x() * xLength + xLength / 2,
+                                         ghostSpeeder->getGridPos().y() * yLength + yLength / 2));
     update();
 
 }
@@ -67,15 +82,15 @@ void PlayField::paintPoints() {
 
 }
 
-void PlayField::paintPacMan() {
+void PlayField::paintAvatar(Avatar* avatar) {
     QPainter painter(this);
-    painter.setPen(Qt::yellow);
-    painter.setBrush(Qt::yellow);
+    painter.setPen(avatar->getColor());
+    painter.setBrush(avatar->getColor());
     int xLength = width() / X_GRID_SIZE;
     int yLength = height() / Y_GRID_SIZE;
     QRect rect(0, 0, xLength * 3 / 4, yLength * 3 / 4);
     //rect.moveCenter(QPoint(pacMan->getGridPos().x() * xLength + xLength / 2, pacMan->getGridPos().y() * yLength + yLength / 2));
-    rect.moveCenter(pacMan->getAvatarPixPos());
+    rect.moveCenter(avatar->getAvatarPixPos());
     painter.drawEllipse(rect);
 }
 
@@ -98,13 +113,15 @@ void PlayField::paintWalls() {
 }
 
 void PlayField::movPacManUp() {
-    if(pacMan->getState() != Avatar::stay) return;
 
+    if(pacMan->getState() != Avatar::stay) return;
     QPoint requestPos(pacMan->getGridPos().x(), pacMan->getGridPos().y() - 1);
     if(grid->movCheck(requestPos)){
-        pacMan->setState(Avatar::up);
         int xLength = width() / X_GRID_SIZE;
         int yLength = height() / Y_GRID_SIZE;
+        //pacMan->movAvatarUp(xLength, yLength);
+
+        pacMan->setState(Avatar::up);
         pacMan->setAvatarPixPos(QPoint(pacMan->getGridPos().x() * xLength + xLength / 2,
                                        pacMan->getGridPos().y() * yLength + yLength / 2));
         pacMan->setGridPos(requestPos);
@@ -112,6 +129,7 @@ void PlayField::movPacManUp() {
         update();
     }
     pointCheck(pacMan->getGridPos());
+
 }
 
 void PlayField::movPacManDown() {
@@ -170,67 +188,72 @@ void PlayField::pointCheck(QPoint toCheckPoint) {
 }
 
 
-void PlayField::movPacMan() {
+void PlayField::movAvatar(Avatar* avatar, QTimer* timer) {
     int xLength = width() / X_GRID_SIZE;
     int yLength = height() / Y_GRID_SIZE;
     int speedPacMan = 1;
-    QPoint endPoint(pacMan->getGridPos().x() * xLength + xLength / 2,
-                    pacMan->getGridPos().y() * yLength + yLength / 2);
-    if(pacMan->getState() == Avatar::stay){
-        timerPacMan->stop();
+    /*
+    if(avatar == nullptr || timer == nullptr )
+        return;
+        */
+    QPoint endPoint(avatar->getGridPos().x() * xLength + xLength / 2,
+                    avatar->getGridPos().y() * yLength + yLength / 2);
+    if(avatar->getState() == Avatar::stay){
+        timer->stop();
         return;
     }
-    if((pacMan->getState() == Avatar::up) || (pacMan->getState() == Avatar::down)){
+    if((avatar->getState() == Avatar::up) || (avatar->getState() == Avatar::down)){
         speedPacMan = yLength / 10;
         if(speedPacMan <= 0) speedPacMan = 1;
-        if(pacMan->getState() == Avatar::up) {
+        if(avatar->getState() == Avatar::up) {
             speedPacMan *= -1;
-            if (pacMan->getAvatarPixPos().y() <= endPoint.y()) {
-                pacMan->setState(Avatar::stay);
-                pacMan->setAvatarPixPos(endPoint);
-                timerPacMan->stop();
+            if (avatar->getAvatarPixPos().y() <= endPoint.y()) {
+                avatar->setState(Avatar::stay);
+                avatar->setAvatarPixPos(endPoint);
+                timer->stop();
                 update();
                 return;
             }
         }
-        if(pacMan->getState() == Avatar::down) {
-            if (pacMan->getAvatarPixPos().y() >= endPoint.y()) {
-                pacMan->setState(Avatar::stay);
-                pacMan->setAvatarPixPos(endPoint);
-                timerPacMan->stop();
+        if(avatar->getState() == Avatar::down) {
+            if (avatar->getAvatarPixPos().y() >= endPoint.y()) {
+                avatar->setState(Avatar::stay);
+                avatar->setAvatarPixPos(endPoint);
+                timer->stop();
                 update();
                 return;
             }
         }
 
-        pacMan->setAvatarPixPos(QPoint(pacMan->getAvatarPixPos().x(), pacMan->getAvatarPixPos().y() + speedPacMan));
+        avatar->setAvatarPixPos(QPoint(avatar->getAvatarPixPos().x(), avatar->getAvatarPixPos().y() + speedPacMan));
 
     }
-    if((pacMan->getState() == Avatar::left) || (pacMan->getState() == Avatar::right)){
+    if((avatar->getState() == Avatar::left) || (avatar->getState() == Avatar::right)){
         speedPacMan = xLength / 10;
         if(speedPacMan <= 0) speedPacMan = 1;
-        if(pacMan->getState() == Avatar::left) {
+        if(avatar->getState() == Avatar::left) {
             speedPacMan *= -1;
-            if (pacMan->getAvatarPixPos().x() <= endPoint.x()) {
-                pacMan->setState(Avatar::stay);
-                pacMan->setAvatarPixPos(endPoint);
-                timerPacMan->stop();
+            if (avatar->getAvatarPixPos().x() <= endPoint.x()) {
+                avatar->setState(Avatar::stay);
+                avatar->setAvatarPixPos(endPoint);
+                timer->stop();
                 update();
                 return;
             }
         }
         if(pacMan->getState() == Avatar::right) {
-            if (pacMan->getAvatarPixPos().x() >= endPoint.x()) {
-                pacMan->setState(Avatar::stay);
-                pacMan->setAvatarPixPos(endPoint);
-                timerPacMan->stop();
+            if (avatar->getAvatarPixPos().x() >= endPoint.x()) {
+                avatar->setState(Avatar::stay);
+                avatar->setAvatarPixPos(endPoint);
+                timer->stop();
                 update();
                 return;
             }
         }
-        pacMan->setAvatarPixPos(QPoint(pacMan->getAvatarPixPos().x() + speedPacMan, pacMan->getAvatarPixPos().y()));
+        avatar->setAvatarPixPos(QPoint(avatar->getAvatarPixPos().x() + speedPacMan, avatar->getAvatarPixPos().y()));
     }
     update();
 }
+
 
 

@@ -9,5 +9,6 @@ Tile::Tile() {
     bigPoint = false;
     wall = false;
     pacMan = false;
-    ghost = false;
+    ghostArea = false;
+    way = false;
 }

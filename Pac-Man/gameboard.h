@@ -32,5 +32,6 @@ private:
     QLCDNumber *scoreLCD;
     QLCDNumber *highScoreLCD;
     PlayField *playField;
+    int collectedSmallPoint;
 
 };

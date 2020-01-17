@@ -12,7 +12,8 @@ public:
     bool bigPoint;
     bool wall;
     bool pacMan;
-    bool ghost;
+    bool ghostArea;
+    bool way;
 
 };
 

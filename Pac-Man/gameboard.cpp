@@ -31,7 +31,7 @@ GameBoard::GameBoard(QWidget *parent)
     connect(newGame, SIGNAL(clicked()), this, SLOT(newGame()));
 
     //Score
-    scoreLCD = new QLCDNumber(2, this);
+    scoreLCD = new QLCDNumber(3, this);
     scoreLCD->setSegmentStyle(QLCDNumber::Filled);
 
     QLabel *scoreLabel = new QLabel(tr("SCORE"), this);
@@ -41,7 +41,7 @@ GameBoard::GameBoard(QWidget *parent)
     connect(playField, SIGNAL(getPoint()), this, SLOT(getPoint()));
 
     //High Score
-    highScoreLCD = new QLCDNumber(2, this);
+    highScoreLCD = new QLCDNumber(3, this);
     highScoreLCD->setSegmentStyle(QLCDNumber::Filled);
     highScoreLCD->setWindowTitle(tr("High Score"));
     QLabel *highScoreLabel = new QLabel(tr("HIGH SCORE"), this);
@@ -78,6 +78,7 @@ GameBoard::GameBoard(QWidget *parent)
 void GameBoard::newGame() {
     scoreLCD->display(0);
     playField->newGame();
+    collectedSmallPoint = 0;
 }
 
 void GameBoard::newHighScore() {
@@ -89,6 +90,7 @@ void GameBoard::getPoint() {
     if(scoreLCD->intValue() >= highScoreLCD->intValue()){
         newHighScore();
     }
+    if(++collectedSmallPoint == 240) newGame();
 }
 
 void GameBoard::movPacManUp() {

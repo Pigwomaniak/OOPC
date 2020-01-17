@@ -4,6 +4,8 @@
 #pragma once
 
 #include <QPoint>
+#include <QPainter>
+
 
 
 
@@ -11,6 +13,7 @@ class Avatar {
 
 public:
     enum MoveState { stay = 0, right = 1, left = 2, up = 3, down = 4};
+
 
     Avatar();
 
@@ -21,6 +24,15 @@ public:
     inline void goHome(){gridPos = homePos;};
     inline MoveState getState(){ return moveState;};
     inline void setState(MoveState newState){moveState = newState;};
+    inline Qt::GlobalColor  getColor(){ return color;};
+
+
+
+
+    //void paintAvatar(QPainter* painter, int xLength, int yLength);
+
+    //void movAvatarUp(int xLength, int yLength);
+    //void movAnimation();
 
     //inline QPoint getPixPos() { return pixPos;};
 
@@ -29,6 +41,10 @@ protected:
     QPoint gridPos;
     QPoint posPix;
     MoveState moveState;
-
+    Qt::GlobalColor color;
+    /*
+    QTimer timer;
+    int animationTime;
+    */
 };
 

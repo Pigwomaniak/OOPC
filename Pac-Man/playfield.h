@@ -5,8 +5,10 @@
 #pragma once
 
 #include <QWidget>
+#include <QTimer>
 #include "grid.h"
 #include "avatar.h"
+#include "ghostSpeeder.h"
 
 #define ANIMATION_TIME_MS 20
 
@@ -27,13 +29,15 @@ public slots:
     void movPacManLeft();
 
 private slots:
-    void movPacMan();
+    void movAvatar(Avatar* avatar, QTimer* timer);
+    void timeToMovPacMan(){movAvatar(pacMan, timerPacMan);};
+    void timeToMovGhostSpider(){movAvatar(ghostSpeeder, timerGhostSpeeder);};
 signals:
     void getPoint();
 protected:
     void paintEvent(QPaintEvent *event);
     void paintPoints();
-    void paintPacMan();
+    void paintAvatar(Avatar* avatar);
     void paintWalls();
 
 
@@ -41,9 +45,13 @@ private:
     QPixmap* pixMap;
     Grid* grid;
     Avatar* pacMan;
+
+    GhostSpeeder* ghostSpeeder;
     void pointCheck(QPoint toCheckPoint);
 
     QTimer* timerPacMan;
+    QTimer* timerGhostSpeeder;
+
 };
 
 

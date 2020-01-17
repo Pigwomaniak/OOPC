@@ -17,10 +17,20 @@ Grid::Grid() {
 void Grid::newGame() {
     for (int i = 0; i < Y_GRID_SIZE; ++i) {
         for (int j = 0; j < X_GRID_SIZE; ++j) {
+            if(walls[i][j] == 0) grid[i][j].way = true;
             if(walls[i][j] == 1) grid[i][j].wall = true;
-            if(walls[i][j] == 2) grid[i][j].smallPoint = true;
-            if(walls[i][j] == 4) grid[i][j].ghost = true;
-            if(walls[i][j] == 6) grid[i][j].bigPoint = true;
+            if(walls[i][j] == 2){
+                grid[i][j].smallPoint = true;
+                grid[i][j].way = true;
+            }
+            if(walls[i][j] == 4){
+                grid[i][j].ghostArea = true;
+                grid[i][j].way = true;
+            }
+            if(walls[i][j] == 6){
+                grid[i][j].bigPoint = true;
+                grid[i][j].way = true;
+            }
         }
     }
 }
@@ -29,6 +39,7 @@ bool Grid::movCheck(QPoint pointToCheck) {
     if((pointToCheck.x() < 0 || pointToCheck.x() >= X_GRID_SIZE) || ((pointToCheck.y() < 0 || pointToCheck.y() >= Y_GRID_SIZE))) return false;
     Tile* tileToCheck = &grid[pointToCheck.y()][pointToCheck.x()];
     if(tileToCheck->wall) return false;
+    if(tileToCheck->ghostArea) return false;
     return true;
 }
 

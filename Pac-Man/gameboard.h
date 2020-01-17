@@ -16,10 +16,12 @@ Q_OBJECT
 
 public:
     GameBoard(QWidget *parent = 0);
+public slots:
+    void newGame();
+
 protected slots:
     void getPoint();
     void newHighScore();
-    void newGame();
 
     void movPacManUp();
     void movPacManDown();

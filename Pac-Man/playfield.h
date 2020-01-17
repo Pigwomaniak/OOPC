@@ -8,17 +8,19 @@
 #include "grid.h"
 #include "avatar.h"
 
+#define ANIMATION_TIME_MS 20
+
 class PlayField
         : public QWidget{
 Q_OBJECT
 
 public:
     PlayField(QWidget *parent = 0);
-
+    void newGame();
 
 
 public slots:
-    void newGame();
+
     void movPacManUp();
     void movPacManDown();
     void movPacManRight();
@@ -28,7 +30,6 @@ private slots:
     void movPacMan();
 signals:
     void getPoint();
-
 protected:
     void paintEvent(QPaintEvent *event);
     void paintPoints();

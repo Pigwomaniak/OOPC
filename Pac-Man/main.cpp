@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
     GameBoard board;
     board.setGeometry(200, 200, 800, 900);
     board.show();
+    board.newGame();
     return app.exec();
 }
 

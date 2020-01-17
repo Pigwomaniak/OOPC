@@ -7,4 +7,7 @@
 Avatar::Avatar() {
     homePos = QPoint(13,23);
     gridPos =  QPoint(13,23);
+    moveState = stay;
+
 }
+

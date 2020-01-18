@@ -10,6 +10,7 @@
 #include "avatar.h"
 #include "ghostSpeeder.h"
 #include "wayFinder.h"
+#include "ghostAmbush.h"
 
 #define ANIMATION_TIME_MS 20
 #define GHOST_SPEED 200
@@ -30,11 +31,12 @@ public slots:
     void movPacManDown();
     void movPacManRight();
     void movPacManLeft();
-    void timeToMovGhostSpider(){movAvatar(ghostSpeeder, timerGhostSpeeder);};
+    //void timeToMovGhostSpeeder(){movAvatar(ghostSpeeder, timerGhostSpeeder);};
 private slots:
     void movAvatar(Avatar* avatar, QTimer* timer);
     void timeToMovPacMan(){movAvatar(pacMan, timerPacMan);};
     void timeToMoveGhostSpeeder(){movAvatar(ghostSpeeder, timerGhostSpeeder);};
+    void timeToMoveGhostAmbush(){movAvatar(ghostAmbush, timerGhostAmbush);};
     void timeToMoveGhosts();
     void ghostGetPacMan(){newGame();};
     void boostEnd();
@@ -46,20 +48,23 @@ protected:
     void paintPoints();
     void paintAvatar(Avatar* avatar);
     void paintWalls();
+    void movGhost(GhostSpeeder* ghost, QTimer* timerGhost);
 
 
 private:
-    QPixmap* pixMap;
+    //QPixmap* pixMap;
     Grid* grid;
     Avatar* pacMan;
 
     GhostSpeeder* ghostSpeeder;
+    GhostAmbush* ghostAmbush;
     void pointCheck(QPoint toCheckPoint);
 
     QTimer* timerPacMan;
     QTimer* timerBoost;
     QTimer* ghostTimer;
     QTimer* timerGhostSpeeder;
+    QTimer* timerGhostAmbush;
     WayFinder::Strategy strategy;
 
 };

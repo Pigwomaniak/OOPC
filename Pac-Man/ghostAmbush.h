@@ -3,10 +3,14 @@
 //
 #pragma once
 
+#include <QPoint>
 #include "ghostSpeeder.h"
-class GhostAmbush : GhostSpeeder{
+#include "grid.h"
+
+class GhostAmbush : public GhostSpeeder{
 public:
-    QPoint ghostDestPoint(Avatar* avatar);
+    GhostAmbush();
+    QPoint ghostDestPoint(Avatar* avatar, Grid* grid);
 };
 
 

@@ -11,6 +11,6 @@ GhostSpeeder::GhostSpeeder() {
     color = Qt::red;
 }
 
-QPoint GhostSpeeder::ghostDestPoint(Avatar* avatar) {
+QPoint GhostSpeeder::ghostDestPoint(Avatar* avatar, Grid* grid) {
     return avatar->getGridPos();
 }

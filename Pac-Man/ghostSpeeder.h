@@ -7,6 +7,7 @@
 #include "avatar.h"
 #include "wayFinder.h"
 #include "tile.h"
+#include "grid.h"
 #include <vector>
 #include <QPoint>
 
@@ -14,7 +15,7 @@
 class GhostSpeeder : public Avatar{
 public:
     GhostSpeeder();
-    virtual QPoint ghostDestPoint(Avatar* avatar);
+    virtual QPoint ghostDestPoint(Avatar* avatar, Grid* grid);
 
 protected:
 

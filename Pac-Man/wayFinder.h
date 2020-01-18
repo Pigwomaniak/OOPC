@@ -21,7 +21,7 @@ public:
     WayFinder(std::vector<std::vector<Tile>>* newGrid, QPoint newGhostPos, QPoint destPoint);
 
 
-    int findMovDirection(int strategy);
+ //   int findMovDirection(int strategy);
     Avatar::MoveState findMovDirection2(Strategy strategy);
 
 private:
@@ -33,7 +33,9 @@ private:
     Avatar::MoveState DirLowCost(QPoint point);
     Avatar::MoveState DirHighCost(QPoint point);
     //stay = 0, right = 1, left = 2, up = 3, down = 4
-    int dx[5] = {0, -1, 1, 0, 0};
-    int dy[5] = {0, 0, 0, 1, -1};
+    //int dx[5] = {0, -1, 1, 0, 0};
+    //int dy[5] = {0, 0, 0, 1, -1};
+    int dx[5] = {0, 1, -1, 0, 0};
+    int dy[5] = {0, 0, 0, -1, 1};
 };
 

@@ -35,12 +35,12 @@ void Grid::newGame() {
     }
 }
 
-bool Grid::movCheck(QPoint pointToCheck) {
-    if((pointToCheck.x() < 0 || pointToCheck.x() >= X_GRID_SIZE) || ((pointToCheck.y() < 0 || pointToCheck.y() >= Y_GRID_SIZE))) return false;
+Grid::MovWay Grid::movCheck(QPoint pointToCheck) {
+    if((pointToCheck.x() < 0 || pointToCheck.x() >= X_GRID_SIZE) || ((pointToCheck.y() < 0 || pointToCheck.y() >= Y_GRID_SIZE))) return teleport;
     Tile* tileToCheck = &grid[pointToCheck.y()][pointToCheck.x()];
-    if(tileToCheck->wall) return false;
-    if(tileToCheck->ghostArea) return false;
-    return true;
+    if(tileToCheck->wall) return forbidden;
+    if(tileToCheck->ghostArea) return forbidden;
+    return normal;
 }
 
 bool Grid::checkSmallPoint(QPoint point) {

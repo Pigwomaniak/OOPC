@@ -48,10 +48,12 @@ const int walls[Y_GRID_SIZE][X_GRID_SIZE] = {
 
 class Grid {
 public:
+    enum MovWay{forbidden = 0, normal = 1, teleport = 2};
     Grid();
     void newGame();
+    std::vector<std::vector<Tile>>* getGridPtr(){ return &grid;};
     std::vector<std::vector<Tile>> grid;
-    bool movCheck(QPoint pointToCheck);
+    MovWay movCheck(QPoint pointToCheck);
     bool checkSmallPoint(QPoint point);
     inline bool checkBigPoint(QPoint point){ return grid[point.y()][point.x()].bigPoint;};
 

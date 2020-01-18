@@ -34,6 +34,12 @@ PlayField::PlayField(QWidget *parent) : QWidget(parent){
     timerGhostAmbush = new QTimer(this);
     connect(timerGhostAmbush, SIGNAL(timeout()), this, SLOT(timeToMoveGhostAmbush()));
 
+    ghostAmbush2 = new GhostAmbush;
+    ghostAmbush2->setColor(Qt::green);
+    ghostAmbush2->setHomePoint(QPoint(15,14));
+    timerGhostAmbush2 = new QTimer(this);
+    connect(timerGhostAmbush2, SIGNAL(timeout()), this, SLOT(timeToMoveGhostAmbush2()));
+
     //pixMap = new QPixmap("fieldMap.jpg");
     setPalette(QPalette(QColor(0, 0, 0)));
     setAutoFillBackground(true);
@@ -60,6 +66,7 @@ void PlayField::paintEvent(QPaintEvent * /* event */) {
     paintAvatar(pacMan);
     paintAvatar(ghostSpeeder);
     paintAvatar(ghostAmbush);
+    paintAvatar(ghostAmbush2);
 
 }
 
@@ -75,6 +82,12 @@ void PlayField::newGame() {
     ghostSpeeder->goHome();
     ghostSpeeder->setAvatarPixPos(QPoint(ghostSpeeder->getGridPos().x() * xLength + xLength / 2,
                                          ghostSpeeder->getGridPos().y() * yLength + yLength / 2));
+    ghostAmbush->goHome();
+    ghostAmbush->setAvatarPixPos(QPoint(ghostAmbush->getGridPos().x() * xLength + xLength / 2,
+                                        ghostAmbush->getGridPos().y() * yLength + yLength / 2));
+    ghostAmbush2->goHome();
+    ghostAmbush2->setAvatarPixPos(QPoint(ghostAmbush2->getGridPos().x() * xLength + xLength / 2,
+                                        ghostAmbush2->getGridPos().y() * yLength + yLength / 2));
     update();
 
 }
@@ -307,49 +320,20 @@ void PlayField::movAvatar(Avatar* avatar, QTimer* timer) {
 }
 
 void PlayField::timeToMoveGhosts() {
-    /*
-    if(ghostSpeeder->getState() != Avatar::stay) return;
-    WayFinder waySpeeder(grid->getGridPtr(), ghostSpeeder->getGridPos(),
-            ghostSpeeder->ghostDestPoint(pacMan, grid));
-    Avatar::MoveState newState = waySpeeder.findMovDirection2(strategy);
-    if(newState == Avatar::stay){
-        ghostGetPacMan();
-        return;
-    }
-    ghostSpeeder->setState(newState);
-    int xLength = width() / X_GRID_SIZE;
-    int yLength = height() / Y_GRID_SIZE;
-    ghostSpeeder->setAvatarPixPos(QPoint(ghostSpeeder->getGridPos().x() * xLength + xLength / 2,
-                                   ghostSpeeder->getGridPos().y() * yLength + yLength / 2));
-    QPoint requestPos(ghostSpeeder->getGridPos().x(), ghostSpeeder->getGridPos().y());
-    if(ghostSpeeder->getState() == Avatar::up){
-        requestPos.ry()--;
-    }
-    if(ghostSpeeder->getState() == Avatar::down){
-        requestPos.ry()++;
-    }
-    if(ghostSpeeder->getState() == Avatar::left){
-        requestPos.rx()--;
-    }
-    if(ghostSpeeder->getState() == Avatar::right){
-        requestPos.rx()++;
-    }
-    ghostSpeeder->setGridPos(requestPos);
-    timerGhostSpeeder->start(ANIMATION_TIME_MS);
-     */
-    movGhost(ghostSpeeder, timerGhostSpeeder);
-    movGhost(ghostAmbush, timerGhostAmbush);
+    movGhost(ghostSpeeder, timerGhostSpeeder, pacMan);
+    movGhost(ghostAmbush, timerGhostAmbush, pacMan);
+    movGhost(ghostAmbush2, timerGhostAmbush2, ghostSpeeder);
 
     update();
 }
 
-void PlayField::movGhost(GhostSpeeder *ghost, QTimer* timerGhost) {
+void PlayField::movGhost(GhostSpeeder *ghost, QTimer* timerGhost, Avatar* reference) {
     if(ghost->getState() != Avatar::stay) return;
     WayFinder waySpeeder(grid->getGridPtr(), ghost->getGridPos(),
-                         ghostSpeeder->ghostDestPoint(pacMan, grid));
+                         ghost->ghostDestPoint(reference, grid));
     Avatar::MoveState newState = waySpeeder.findMovDirection2(strategy);
     if(newState == Avatar::stay){
-        ghostGetPacMan();
+        //ghostGetPacMan();
         return;
     }
     ghost->setState(newState);
@@ -371,6 +355,9 @@ void PlayField::movGhost(GhostSpeeder *ghost, QTimer* timerGhost) {
         requestPos.rx()++;
     }
     ghost->setGridPos(requestPos);
+    if(pacMan->getGridPos() == ghost->getGridPos()){
+        ghostGetPacMan();
+    }
     timerGhost->start(ANIMATION_TIME_MS);
 }
 

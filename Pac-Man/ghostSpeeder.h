@@ -16,6 +16,8 @@ class GhostSpeeder : public Avatar{
 public:
     GhostSpeeder();
     virtual QPoint ghostDestPoint(Avatar* avatar, Grid* grid);
+    void setColor(Qt::GlobalColor newColor){color = newColor;};
+    void setHomePoint(QPoint newHome){homePos = newHome;};
 
 protected:
 

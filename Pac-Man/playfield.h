@@ -13,7 +13,7 @@
 #include "ghostAmbush.h"
 
 #define ANIMATION_TIME_MS 20
-#define GHOST_SPEED 200
+#define GHOST_SPEED 160
 #define BOOST_TIME 8000
 
 class PlayField
@@ -37,6 +37,7 @@ private slots:
     void timeToMovPacMan(){movAvatar(pacMan, timerPacMan);};
     void timeToMoveGhostSpeeder(){movAvatar(ghostSpeeder, timerGhostSpeeder);};
     void timeToMoveGhostAmbush(){movAvatar(ghostAmbush, timerGhostAmbush);};
+    void timeToMoveGhostAmbush2(){movAvatar(ghostAmbush2, timerGhostAmbush2);};
     void timeToMoveGhosts();
     void ghostGetPacMan(){newGame();};
     void boostEnd();
@@ -48,7 +49,7 @@ protected:
     void paintPoints();
     void paintAvatar(Avatar* avatar);
     void paintWalls();
-    void movGhost(GhostSpeeder* ghost, QTimer* timerGhost);
+    void movGhost(GhostSpeeder* ghost, QTimer* timerGhost, Avatar* reference);
 
 
 private:
@@ -58,6 +59,7 @@ private:
 
     GhostSpeeder* ghostSpeeder;
     GhostAmbush* ghostAmbush;
+    GhostAmbush* ghostAmbush2;
     void pointCheck(QPoint toCheckPoint);
 
     QTimer* timerPacMan;
@@ -65,6 +67,7 @@ private:
     QTimer* ghostTimer;
     QTimer* timerGhostSpeeder;
     QTimer* timerGhostAmbush;
+    QTimer* timerGhostAmbush2;
     WayFinder::Strategy strategy;
 
 };

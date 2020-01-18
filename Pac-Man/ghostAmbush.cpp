@@ -15,30 +15,30 @@ QPoint GhostAmbush::ghostDestPoint(Avatar *avatar, Grid* grid) {
     QPoint destPoint = avatar->getGridPos();
     MoveState actualMov = avatar->getState();
     if(actualMov == up){
-        if((destPoint.y() - 5) >= 0){
-            if(grid->grid[destPoint.y() - 5][destPoint.x()].wall){
-                destPoint.ry() -= 5;
+        if((destPoint.y() - FORWARD_LOOK) >= 0){
+            if(grid->grid[destPoint.y() - FORWARD_LOOK][destPoint.x()].wall){
+                destPoint.ry() -= FORWARD_LOOK;
             }
         }
     }
     if(actualMov == down){
-        if((destPoint.y() + 5) < Y_GRID_SIZE){
-            if(grid->grid[destPoint.y() + 5][destPoint.x()].wall){
-                destPoint.ry() += 5;
+        if((destPoint.y() + FORWARD_LOOK) < Y_GRID_SIZE){
+            if(grid->grid[destPoint.y() + FORWARD_LOOK][destPoint.x()].wall){
+                destPoint.ry() += FORWARD_LOOK;
             }
         }
     }
     if(actualMov == left){
-        if((destPoint.x() - 5) >= 0){
-            if(grid->grid[destPoint.y()][destPoint.x() - 5].wall){
-                destPoint.rx() -= 5;
+        if((destPoint.x() - FORWARD_LOOK) >= 0){
+            if(grid->grid[destPoint.y()][destPoint.x() - FORWARD_LOOK].wall){
+                destPoint.rx() -= FORWARD_LOOK;
             }
         }
     }
     if(actualMov == right){
-        if((destPoint.x() + 5) < X_GRID_SIZE){
-            if(grid->grid[destPoint.y()][destPoint.x() + 5].wall){
-                destPoint.rx() += 5;
+        if((destPoint.x() + FORWARD_LOOK) < X_GRID_SIZE){
+            if(grid->grid[destPoint.y()][destPoint.x() + FORWARD_LOOK].wall){
+                destPoint.rx() += FORWARD_LOOK;
             }
         }
     }

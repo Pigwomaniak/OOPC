@@ -5,6 +5,7 @@
 #pragma once
 
 #include "avatar.h"
+#include "wayFinder.h"
 
 class GhostSpeeder : public Avatar{
 public:

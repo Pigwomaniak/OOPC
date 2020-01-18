@@ -18,6 +18,9 @@ PlayField::PlayField(QWidget *parent) : QWidget(parent){
     timerPacMan = new QTimer(this);
     connect(timerPacMan, SIGNAL(timeout()), this, SLOT(timeToMovPacMan()));
 
+    ghostTimer = new QTimer(this);
+
+
     ghostSpeeder = new GhostSpeeder;
     timerGhostSpeeder = new QTimer(this);
     connect(timerGhostSpeeder, SIGNAL(timeout()), this, SLOT(timeToMovGhostSpider()));
@@ -119,16 +122,18 @@ void PlayField::movPacManUp() {
     if(grid->movCheck(requestPos)){
         int xLength = width() / X_GRID_SIZE;
         int yLength = height() / Y_GRID_SIZE;
-        //pacMan->movAvatarUp(xLength, yLength);
 
         pacMan->setState(Avatar::up);
         pacMan->setAvatarPixPos(QPoint(pacMan->getGridPos().x() * xLength + xLength / 2,
                                        pacMan->getGridPos().y() * yLength + yLength / 2));
+        grid->grid[pacMan->getGridPos().y()][pacMan->getGridPos().x()].pacMan = false;
         pacMan->setGridPos(requestPos);
+        grid->grid[pacMan->getGridPos().y()][pacMan->getGridPos().x()].pacMan = true;
         timerPacMan->start(ANIMATION_TIME_MS);
         update();
     }
     pointCheck(pacMan->getGridPos());
+
 
 }
 
@@ -141,7 +146,9 @@ void PlayField::movPacManDown() {
         int yLength = height() / Y_GRID_SIZE;
         pacMan->setAvatarPixPos(QPoint(pacMan->getGridPos().x() * xLength + xLength / 2,
                                        pacMan->getGridPos().y() * yLength + yLength / 2));
+        grid->grid[pacMan->getGridPos().y()][pacMan->getGridPos().x()].pacMan = false;
         pacMan->setGridPos(requestPos);
+        grid->grid[pacMan->getGridPos().y()][pacMan->getGridPos().x()].pacMan = true;
         timerPacMan->start(ANIMATION_TIME_MS);
         update();
     }
@@ -157,7 +164,9 @@ void PlayField::movPacManRight() {
         int yLength = height() / Y_GRID_SIZE;
         pacMan->setAvatarPixPos(QPoint(pacMan->getGridPos().x() * xLength + xLength / 2,
                                        pacMan->getGridPos().y() * yLength + yLength / 2));
+        grid->grid[pacMan->getGridPos().y()][pacMan->getGridPos().x()].pacMan = false;
         pacMan->setGridPos(requestPos);
+        grid->grid[pacMan->getGridPos().y()][pacMan->getGridPos().x()].pacMan = true;
         timerPacMan->start(ANIMATION_TIME_MS);
         update();
 
@@ -174,7 +183,9 @@ void PlayField::movPacManLeft() {
         int yLength = height() / Y_GRID_SIZE;
         pacMan->setAvatarPixPos(QPoint(pacMan->getGridPos().x() * xLength + xLength / 2,
                                        pacMan->getGridPos().y() * yLength + yLength / 2));
+        grid->grid[pacMan->getGridPos().y()][pacMan->getGridPos().x()].pacMan = false;
         pacMan->setGridPos(requestPos);
+        grid->grid[pacMan->getGridPos().y()][pacMan->getGridPos().x()].pacMan = true;
         timerPacMan->start(ANIMATION_TIME_MS);
         update();
     }
@@ -253,6 +264,10 @@ void PlayField::movAvatar(Avatar* avatar, QTimer* timer) {
         avatar->setAvatarPixPos(QPoint(avatar->getAvatarPixPos().x() + speedPacMan, avatar->getAvatarPixPos().y()));
     }
     update();
+}
+
+void PlayField::timeToMoveGhosts() {
+
 }
 
 

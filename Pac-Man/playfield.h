@@ -27,11 +27,13 @@ public slots:
     void movPacManDown();
     void movPacManRight();
     void movPacManLeft();
-
+    void timeToMovGhostSpider(){movAvatar(ghostSpeeder, timerGhostSpeeder);};
 private slots:
     void movAvatar(Avatar* avatar, QTimer* timer);
     void timeToMovPacMan(){movAvatar(pacMan, timerPacMan);};
-    void timeToMovGhostSpider(){movAvatar(ghostSpeeder, timerGhostSpeeder);};
+    void timeToMoveGhostSpeeder(){movAvatar(ghostSpeeder, timerGhostSpeeder);};
+    void timeToMoveGhosts();
+
 signals:
     void getPoint();
 protected:
@@ -48,7 +50,7 @@ private:
 
     GhostSpeeder* ghostSpeeder;
     void pointCheck(QPoint toCheckPoint);
-
+    QTimer* ghostTimer;
     QTimer* timerPacMan;
     QTimer* timerGhostSpeeder;
 

@@ -14,6 +14,8 @@ public:
     bool pacMan;
     bool ghostArea;
     bool way;
+    bool ghost;
+    int wayPointNbr;
 
 };
 

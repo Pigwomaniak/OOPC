@@ -11,4 +11,6 @@ Tile::Tile() {
     pacMan = false;
     ghostArea = false;
     way = false;
+    ghost = false;
+    wayPointNbr = 1000;
 }

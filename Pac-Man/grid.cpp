@@ -50,3 +50,11 @@ bool Grid::checkSmallPoint(QPoint point) {
     }
     return false;
 }
+
+bool Grid::checkBigPoint(QPoint point) {
+    if(grid[point.y()][point.x()].bigPoint){
+        grid[point.y()][point.x()].bigPoint = false;
+        return true;
+    }
+    return false;
+}

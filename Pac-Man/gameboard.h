@@ -21,17 +21,14 @@ public slots:
 
 protected slots:
     void getPoint();
+    void getBigPoint();
     void newHighScore();
-
-    void movPacManUp();
-    void movPacManDown();
-    void movPacManRight();
-    void movPacManLeft();
+    void pacManKilled();
 
 private:
     QLCDNumber *scoreLCD;
     QLCDNumber *highScoreLCD;
+    QLCDNumber *livesLCD;
     PlayField *playField;
     int collectedSmallPoint;
-
 };

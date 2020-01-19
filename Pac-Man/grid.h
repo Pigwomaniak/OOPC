@@ -55,6 +55,6 @@ public:
     std::vector<std::vector<Tile>> grid;
     MovWay movCheck(QPoint pointToCheck);
     bool checkSmallPoint(QPoint point);
-    inline bool checkBigPoint(QPoint point){ return grid[point.y()][point.x()].bigPoint;};
+    bool checkBigPoint(QPoint point);
 
 };

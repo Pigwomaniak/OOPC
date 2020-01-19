@@ -3,7 +3,7 @@
 //
 
 #include <QPalette>
-//#include <QLabel>
+#include <QLabel>
 #include <QPainter>
 #include <QBrush>
 #include <QWidget>
@@ -40,6 +40,8 @@ PlayField::PlayField(QWidget *parent) : QWidget(parent){
     timerGhostAmbush2 = new QTimer(this);
     connect(timerGhostAmbush2, SIGNAL(timeout()), this, SLOT(timeToMoveGhostAmbush2()));
 
+
+
     //pixMap = new QPixmap("fieldMap.jpg");
     setPalette(QPalette(QColor(0, 0, 0)));
     setAutoFillBackground(true);
@@ -67,12 +69,19 @@ void PlayField::paintEvent(QPaintEvent * /* event */) {
     paintAvatar(ghostSpeeder);
     paintAvatar(ghostAmbush);
     paintAvatar(ghostAmbush2);
+    if(gameOver){
+        QPainter painter(this);
+        painter.setPen(Qt::red);
+        painter.setFont(QFont("Courier", 56, QFont::Bold));
+        painter.drawText(rect(), Qt::AlignCenter, tr("Game Over"));
+    }
 
 }
 
 void PlayField::newGame() {
     int xLength = width() / X_GRID_SIZE;
     int yLength = height() / Y_GRID_SIZE;
+    gameOver = false;
     grid->newGame();
     pacMan->goHome();
 
@@ -248,6 +257,7 @@ void PlayField::pointCheck(QPoint toCheckPoint) {
     if(grid->checkBigPoint(toCheckPoint) && strategy == WayFinder::seek){
         strategy = WayFinder::runAway;
         timerBoost->start(BOOST_TIME);
+        emit getBigPoint();
     }
 }
 
@@ -290,7 +300,6 @@ void PlayField::movAvatar(Avatar* avatar, QTimer* timer) {
         }
 
         avatar->setAvatarPixPos(QPoint(avatar->getAvatarPixPos().x(), avatar->getAvatarPixPos().y() + speedPacMan));
-
     }
     if((avatar->getState() == Avatar::left) || (avatar->getState() == Avatar::right)){
         speedPacMan = xLength / 10;
@@ -356,8 +365,25 @@ void PlayField::movGhost(GhostSpeeder *ghost, QTimer* timerGhost, Avatar* refere
     }
     ghost->setGridPos(requestPos);
     if(pacMan->getGridPos() == ghost->getGridPos()){
-        ghostGetPacMan();
+        ghostGetPacMan(ghost);
     }
     timerGhost->start(ANIMATION_TIME_MS);
 }
+
+void PlayField::ghostGetPacMan(GhostSpeeder* ghost) {
+    int xLength = width() / X_GRID_SIZE;
+    int yLength = height() / Y_GRID_SIZE;
+    if(strategy == WayFinder::seek){
+
+        emit pacManKilled();
+        pacMan->goHome();
+        pacMan->setAvatarPixPos(QPoint(pacMan->getGridPos().x() * xLength + xLength / 2,
+                                       pacMan->getGridPos().y() * yLength + yLength / 2));
+    }
+    ghost->goHome();
+    ghost->setAvatarPixPos(QPoint(ghost->getGridPos().x() * xLength + xLength / 2,
+                                  ghost->getGridPos().y() * yLength + yLength / 2));
+}
+
+
 
